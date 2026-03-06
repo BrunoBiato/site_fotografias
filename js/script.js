@@ -1,4 +1,4 @@
-// Lógica da Janela
+
 const btnClose = document.getElementById('btn-fechar');
 const janelaPrincipal = document.getElementById('janela-principal');
 const msgFechado = document.getElementById('msg-fechado');
@@ -18,14 +18,14 @@ if (btnRecarregar) {
     });
 }
 
-// Lógica do Player de Música
+
 const audio = document.getElementById('bg-audio');
 const btnPlay = document.getElementById('btn-play');
 const btnPause = document.getElementById('btn-pause');
 
 if(btnPlay && audio) {
     btnPlay.addEventListener('click', () => {
-        // Tenta tocar a música. Se o ficheiro não for encontrado, mostra um erro.
+        
         audio.play().catch(e => alert("Coloque o ficheiro de áudio correto na pasta para tocar!"));
     });
 }

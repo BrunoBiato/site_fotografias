@@ -99,42 +99,40 @@ body {
 
 .xp-btn-player:active {
     border-style: inset;
-    padding: 5px 19px 3px 21px; /* Efeito de clique afundado */
+    padding: 5px 19px 3px 21px; 
 }
 
-/* =========================================
-   2. FUNDO DA PASTA (Janela do XP Principal)
-   ========================================= */
+
 .xp-window {
     width: 90%;
     max-width: 1000px;
-    height: 70vh; /* Altura reduzida para caber o player sem criar scroll no body */
-    background-color: #ece9d8; /* Cor de fallback (Bege clássico do XP) */
+    height: 70vh; 
+    background-color: #ece9d8; 
     border: 3px solid #0055e5;
     border-radius: 8px 8px 0 0;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5); /* Sombra ajustada para o novo fundo */
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5); 
     position: relative;
     transition: opacity 0.3s ease;
-    z-index: 1; /* Necessário para contexto de camadas */
-    overflow: hidden; /* Corta a imagem borrada nas bordas redondas e laterais */
+    z-index: 1; 
+    overflow: hidden; 
 }
 
-/* Camada separada contendo a imagem da pasta com blur (assim não borra as fotos) */
+
 .xp-window::before {
     content: "";
     position: absolute;
-    /* Margens negativas evitam que a borda do desfoque fique transparente */
+    
     top: -15px; left: -15px; right: -15px; bottom: -15px; 
-    /* Substitua pela imagem que quer no fundo da pasta */
+    
     background: url('../assets/images/background.jpg') no-repeat center center;
     background-size: cover;
-    filter: blur(8px); /* Intensidade do desfoque na imagem de fundo */
-    z-index: -1; /* Mantém a imagem atrás do conteúdo da pasta */
+    filter: blur(8px); 
+    z-index: -1; 
 }
 
-/* Barra de Título XP */
+
 .xp-titlebar {
     background: linear-gradient(to right, #0058e6 0%, #3a93ff 50%, #0058e6 100%);
     padding: 4px 6px;
@@ -145,7 +143,7 @@ body {
     border-radius: 5px 5px 0 0;
     user-select: none;
     position: relative;
-    z-index: 2; /* Garante que fica acima do fundo borrado */
+    z-index: 2; 
 }
 
 .xp-title {
@@ -168,7 +166,7 @@ body {
     font-size: 14px;
 }
 
-/* Botões de Controlo XP */
+
 .xp-controls {
     display: flex;
     gap: 2px;
@@ -203,21 +201,21 @@ body {
     box-shadow: inset 0 2px 4px rgba(0,0,0,0.4);
 }
 
-/* Área de Conteúdo / Grelha de Fotografias */
+
 .xp-content {
     flex: 1;
     overflow-y: auto;
     overflow-x: hidden;
     padding: 40px 60px;
     position: relative;
-    z-index: 2; /* Garante que as fotos e o scroll ficam acima do fundo borrado */
+    z-index: 2; 
 }
 
 .xp-content::-webkit-scrollbar {
     width: 16px;
 }
 .xp-content::-webkit-scrollbar-track {
-    background: rgba(240, 240, 240, 0.6); /* Ligeiramente mais transparente agora que tem blur atrás */
+    background: rgba(240, 240, 240, 0.6); 
     border-left: 1px solid #ccc;
 }
 .xp-content::-webkit-scrollbar-thumb {
@@ -245,11 +243,11 @@ body {
 
 .photo-wrapper img {
     width: 100%;
-    height: 250px; /* Altura ligeiramente ajustada para caber mais na tela */
+    height: 250px; 
     object-fit: cover;
     border: 1px solid #ddd;
     display: block;
-    background-color: #f4f4f4; /* Fundo caso a imagem demore a carregar */
+    background-color: #f4f4f4; 
 }
 
 .photo-label {
@@ -266,7 +264,7 @@ body {
 .photo-wrapper:hover {
     transform: scale(1.35);
     z-index: 10;
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 255, 255, 0.6); /* Sombra mais difusa e clara para o fundo claro */
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 255, 255, 0.6); 
 }
 
 #msg-fechado {
@@ -289,20 +287,20 @@ body {
     font-weight: bold;
 }
 
-/* Responsividade para Telas Menores (Mobile) */
+
 @media (max-width: 600px) {
     body {
-        gap: 10px; /* Reduz espaço entre player e galeria no telemóvel */
+        gap: 10px; 
         padding-top: 10px;
     }
 
     .xp-window {
         width: 95%;
-        height: 65vh; /* Ajusta altura para não criar barra de scroll principal */
+        height: 65vh; 
     }
 
     .xp-content {
-        padding: 20px 25px; /* Reduz padding lateral para aproveitar tela */
+        padding: 20px 25px; 
     }
 
     .photo-grid {
@@ -310,6 +308,6 @@ body {
     }
 
     .photo-wrapper:hover {
-        transform: scale(1.05); /* Zoom menor no telemóvel para não sair da tela */
+        transform: scale(1.05); 
     }
 }
