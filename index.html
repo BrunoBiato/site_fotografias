@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeria Y2K - Windows XP</title>
+    <!-- Conectando o arquivo CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Fundo da Página -->
+    <div class="bg-image"></div>
+    <div class="bg-overlay"></div> <!-- Efeito glossy extra -->
+
+    <!-- MINI PLAYER Y2K (Agora no topo) -->
+    <div class="xp-player" id="mini-player">
+        <div class="xp-titlebar">
+            <div class="xp-title">Media Player</div>
+            <div class="xp-controls">
+                <button class="xp-btn xp-btn-min">_</button>
+            </div>
+        </div>
+        <div class="player-content">
+            <div class="player-screen">
+                <!-- O letreiro da música -->
+                <marquee scrollamount="3" id="song-title">A reproduzir: e u p h o r i a.mp3</marquee>
+            </div>
+            <div class="player-controls">
+                <button class="xp-btn-player" id="btn-play">▶ Play</button>
+                <button class="xp-btn-player" id="btn-pause">⏸ Pause</button>
+            </div>
+            
+            <!-- Elemento de áudio invisível -->
+            <audio id="bg-audio" loop>
+                <!-- Substitua o src abaixo pelo caminho da sua música -->
+                <source src="assets/songs/euphoria.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+    </div>
+
+    <!-- Janela Principal do Windows XP -->
+    <div class="xp-window" id="janela-principal">
+        <div class="xp-titlebar">
+            <div class="xp-title">C:\Utilizadores\Visitante\Imagens\Fotos_Biato</div>
+            <div class="xp-controls">
+                <button class="xp-btn xp-btn-min">_</button>
+                <button class="xp-btn xp-btn-max">□</button>
+                <button class="xp-btn xp-btn-close" id="btn-fechar">X</button>
+            </div>
+        </div>
+
+        <div class="xp-content">
+            <div class="photo-grid">
+                
+                <!-- Foto 1 -->
+                <div class="photo-wrapper">
+                    <img src="assets/images/fotografia_liberdade.jpg" alt="Retrato Urbano Noturno">
+                    <div class="photo-label">flashing_lights.jpg</div>
+                </div>
+
+                <!-- Foto 2 -->
+                <div class="photo-wrapper">
+                    <img src="assets/images/fotografia_fantasmas.jpg" alt="Estilo Streetwear Urbano">
+                    <div class="photo-label">fantasmas.png</div>
+                </div>
+
+                <!-- Foto 3 -->
+                <div class="photo-wrapper">
+                    <img src="assets/images/fotografia_lunatic.jpg" alt="Neon Urbano">
+                    <div class="photo-label">lunatico.jpg</div>
+                </div>
+
+                <!-- Foto 4 -->
+                <div class="photo-wrapper">
+                    <img src="assets/images/fotografia_lunatic.jpg" alt="Moda de Rua">
+                    <div class="photo-label">hidenthemoon.jpg</div>
+                </div>
+
+                <!-- Foto 5 -->
+                <div class="photo-wrapper">
+                    <img src="assets/images/fotografia_terceiro.jpg" alt="Estilo Skatista Urbano">
+                    <div class="photo-label">impactoimpacto.png</div>
+                </div>
+
+                <!-- Foto 6 -->
+                <div class="photo-wrapper">
+                    <img src="assets/images/fotografia_pixacao.jpg" alt="Luzes da Cidade">
+                    <div class="photo-label">xDDD.jpg</div>
+                </div>
+
+                <!-- Foto 7 -->
+                <div class="photo-wrapper">
+                    <img src="assets/images/fotografia_autoretrato.jpg" alt="Cultura de Rua">
+                    <div class="photo-label">retrato.jpg</div>
+                </div>
+
+                <!-- Foto 8 -->
+                <div class="photo-wrapper">
+                    <img src="assets/images/fotografia_cerveja.png" alt="Moda Jovem Urbana">
+                    <div class="photo-label">beeeeeeer.png</div>
+                </div>
+                
+                <!-- Foto 9 -->
+                <div class="photo-wrapper">
+                    <img src="assets/images/fotografia_rosas.png" alt="Moda Jovem Urbana">
+                    <div class="photo-label">rosas_de_sangue.png</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Mensagem mostrada ao fechar a janela -->
+    <div id="msg-fechado">
+        <p>A ligação foi terminada.</p>
+        <button id="btn-recarregar">Reiniciar Explorador</button>
+    </div>
+
+    <!-- Conectando o arquivo JavaScript -->
+    <script src="js/script.js"></script>
+</body>
+</html>

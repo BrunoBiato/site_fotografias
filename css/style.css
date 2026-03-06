@@ -1,0 +1,315 @@
+/* Reset e Tipografia Global */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Tahoma, "Segoe UI", sans-serif;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column; /* Coloca os elementos um em cima do outro */
+    justify-content: center;
+    align-items: center;
+    gap: 15px; /* Espaço entre o player e a galeria */
+    overflow: hidden;
+    background-color: #d7f4ff; /* Fundo base azul claro */
+}
+
+/* =========================================
+   1. FUNDO GERAL DA PÁGINA (Atrás de tudo)
+   ========================================= */
+.bg-image {
+    position: fixed;
+    top: -5%;
+    left: -5%;
+    width: 110%;
+    height: 110%;
+    /* Substitua 'seu_fundo_pagina.jpg' pelo caminho da imagem que quer no fundo principal */
+    background: url('../assets/images/praia_windows.jpg') no-repeat center center;
+    background-size: cover;
+    /* Pode remover a linha de baixo se não quiser filtros na sua imagem */
+    filter: blur(3px) brightness(1.15) saturate(1.4);
+    z-index: -2;
+}
+
+/* Camada extra para dar o efeito "Glossy" (Vidro Brilhante e Azulado) sobre o fundo principal */
+.bg-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(79, 172, 254, 0.2) 50%, rgba(0, 242, 254, 0.15) 100%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* MINI PLAYER XP (Posicionado no Topo) */
+.xp-player {
+    position: relative;
+    width: 90%;
+    max-width: 400px; /* Largura maior para ficar mais bonito no centro */
+    background-color: #ece9d8;
+    border: 3px solid #0055e5;
+    border-radius: 8px 8px 0 0;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5); /* Sombra mais clara para combinar com fundo claro */
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+}
+
+.player-content {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.player-screen {
+    background-color: #000;
+    color: #0f0;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 12px;
+    padding: 4px;
+    border: 2px inset #fff;
+    border-right-color: #ccc;
+    border-bottom-color: #ccc;
+    overflow: hidden;
+}
+
+.player-controls {
+    display: flex;
+    justify-content: space-around;
+}
+
+.xp-btn-player {
+    padding: 4px 20px;
+    font-family: Tahoma, sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    background: #ece9d8;
+    border: 2px outset #fff;
+    border-right-color: #888;
+    border-bottom-color: #888;
+    color: #000;
+}
+
+.xp-btn-player:active {
+    border-style: inset;
+    padding: 5px 19px 3px 21px; /* Efeito de clique afundado */
+}
+
+/* =========================================
+   2. FUNDO DA PASTA (Janela do XP Principal)
+   ========================================= */
+.xp-window {
+    width: 90%;
+    max-width: 1000px;
+    height: 70vh; /* Altura reduzida para caber o player sem criar scroll no body */
+    background-color: #ece9d8; /* Cor de fallback (Bege clássico do XP) */
+    border: 3px solid #0055e5;
+    border-radius: 8px 8px 0 0;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5); /* Sombra ajustada para o novo fundo */
+    position: relative;
+    transition: opacity 0.3s ease;
+    z-index: 1; /* Necessário para contexto de camadas */
+    overflow: hidden; /* Corta a imagem borrada nas bordas redondas e laterais */
+}
+
+/* Camada separada contendo a imagem da pasta com blur (assim não borra as fotos) */
+.xp-window::before {
+    content: "";
+    position: absolute;
+    /* Margens negativas evitam que a borda do desfoque fique transparente */
+    top: -15px; left: -15px; right: -15px; bottom: -15px; 
+    /* Substitua pela imagem que quer no fundo da pasta */
+    background: url('../assets/images/background.jpg') no-repeat center center;
+    background-size: cover;
+    filter: blur(8px); /* Intensidade do desfoque na imagem de fundo */
+    z-index: -1; /* Mantém a imagem atrás do conteúdo da pasta */
+}
+
+/* Barra de Título XP */
+.xp-titlebar {
+    background: linear-gradient(to right, #0058e6 0%, #3a93ff 50%, #0058e6 100%);
+    padding: 4px 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #003399;
+    border-radius: 5px 5px 0 0;
+    user-select: none;
+    position: relative;
+    z-index: 2; /* Garante que fica acima do fundo borrado */
+}
+
+.xp-title {
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    text-shadow: 1px 1px 2px #000;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.xp-window .xp-title::before {
+    content: "📁";
+    font-size: 14px;
+}
+
+.xp-player .xp-title::before {
+    content: "🎵";
+    font-size: 14px;
+}
+
+/* Botões de Controlo XP */
+.xp-controls {
+    display: flex;
+    gap: 2px;
+}
+
+.xp-btn {
+    width: 22px;
+    height: 22px;
+    border: 1px solid #fff;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 12px;
+    color: white;
+    cursor: pointer;
+    box-shadow: inset 0 -2px 4px rgba(0,0,0,0.2), inset 0 2px 2px rgba(255,255,255,0.7);
+}
+
+.xp-btn-min, .xp-btn-max {
+    background: linear-gradient(to bottom, #5ba4fb, #216cf6);
+    border-color: #003399;
+}
+
+.xp-btn-close {
+    background: linear-gradient(to bottom, #f37265, #e03221);
+    border-color: #661111;
+}
+
+.xp-btn:active {
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.4);
+}
+
+/* Área de Conteúdo / Grelha de Fotografias */
+.xp-content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 40px 60px;
+    position: relative;
+    z-index: 2; /* Garante que as fotos e o scroll ficam acima do fundo borrado */
+}
+
+.xp-content::-webkit-scrollbar {
+    width: 16px;
+}
+.xp-content::-webkit-scrollbar-track {
+    background: rgba(240, 240, 240, 0.6); /* Ligeiramente mais transparente agora que tem blur atrás */
+    border-left: 1px solid #ccc;
+}
+.xp-content::-webkit-scrollbar-thumb {
+    background: #cdced1;
+    border: 1px solid #eee;
+    box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #999;
+}
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 30px;
+    padding-bottom: 20px;
+}
+
+.photo-wrapper {
+    position: relative;
+    background: #fff;
+    padding: 10px 10px 35px 10px;
+    box-shadow: 2px 4px 10px rgba(0,0,0,0.2);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
+    z-index: 1;
+    cursor: crosshair;
+}
+
+.photo-wrapper img {
+    width: 100%;
+    height: 250px; /* Altura ligeiramente ajustada para caber mais na tela */
+    object-fit: cover;
+    border: 1px solid #ddd;
+    display: block;
+    background-color: #f4f4f4; /* Fundo caso a imagem demore a carregar */
+}
+
+.photo-label {
+    text-align: center;
+    margin-top: 8px;
+    font-family: Tahoma, "Segoe UI", sans-serif;
+    font-size: 13px;
+    color: #000;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.photo-wrapper:hover {
+    transform: scale(1.35);
+    z-index: 10;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 255, 255, 0.6); /* Sombra mais difusa e clara para o fundo claro */
+}
+
+#msg-fechado {
+    display: none;
+    color: white;
+    font-size: 24px;
+    text-align: center;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
+}
+
+#btn-recarregar {
+    margin-top: 15px;
+    padding: 8px 16px;
+    font-family: Tahoma, sans-serif;
+    cursor: pointer;
+    background: #ece9d8;
+    border: 2px solid #fff;
+    border-right-color: #888;
+    border-bottom-color: #888;
+    font-weight: bold;
+}
+
+/* Responsividade para Telas Menores (Mobile) */
+@media (max-width: 600px) {
+    body {
+        gap: 10px; /* Reduz espaço entre player e galeria no telemóvel */
+        padding-top: 10px;
+    }
+
+    .xp-window {
+        width: 95%;
+        height: 65vh; /* Ajusta altura para não criar barra de scroll principal */
+    }
+
+    .xp-content {
+        padding: 20px 25px; /* Reduz padding lateral para aproveitar tela */
+    }
+
+    .photo-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+    }
+
+    .photo-wrapper:hover {
+        transform: scale(1.05); /* Zoom menor no telemóvel para não sair da tela */
+    }
+}
