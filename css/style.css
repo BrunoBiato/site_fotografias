@@ -1,4 +1,4 @@
-/* Reset e Tipografia Global */
+
 * {
     margin: 0;
     padding: 0;
@@ -10,32 +10,30 @@ body {
     height: 100vh;
     width: 100vw;
     display: flex;
-    flex-direction: column; /* Coloca os elementos um em cima do outro */
+    flex-direction: column; 
     justify-content: center;
     align-items: center;
-    gap: 15px; /* Espaço entre o player e a galeria */
+    gap: 15px; 
     overflow: hidden;
-    background-color: #d7f4ff; /* Fundo base azul claro */
+    background-color: #d7f4ff; 
 }
 
-/* =========================================
-   1. FUNDO GERAL DA PÁGINA (Atrás de tudo)
-   ========================================= */
+
 .bg-image {
     position: fixed;
     top: -5%;
     left: -5%;
     width: 110%;
     height: 110%;
-    /* Substitua 'seu_fundo_pagina.jpg' pelo caminho da imagem que quer no fundo principal */
+    
     background: url('../assets/images/praia_windows.jpg') no-repeat center center;
     background-size: cover;
-    /* Pode remover a linha de baixo se não quiser filtros na sua imagem */
+    
     filter: blur(3px) brightness(1.15) saturate(1.4);
     z-index: -2;
 }
 
-/* Camada extra para dar o efeito "Glossy" (Vidro Brilhante e Azulado) sobre o fundo principal */
+
 .bg-overlay {
     position: fixed;
     top: 0;
@@ -47,15 +45,15 @@ body {
     pointer-events: none;
 }
 
-/* MINI PLAYER XP (Posicionado no Topo) */
+
 .xp-player {
     position: relative;
     width: 90%;
-    max-width: 400px; /* Largura maior para ficar mais bonito no centro */
+    max-width: 400px; 
     background-color: #ece9d8;
     border: 3px solid #0055e5;
     border-radius: 8px 8px 0 0;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5); /* Sombra mais clara para combinar com fundo claro */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5); 
     z-index: 100;
     display: flex;
     flex-direction: column;
