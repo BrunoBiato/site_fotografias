@@ -1,4 +1,3 @@
-// Remove a tela de loading
 setTimeout(() => {
     const loadingScreen = document.getElementById('loading-screen');
     if(loadingScreen) {
@@ -8,6 +7,11 @@ setTimeout(() => {
         }, 500); 
     }
 }, 3000); 
+
+setTimeout(() => {
+    const clippyCont = document.getElementById('clippy-container');
+    if (clippyCont) clippyCont.classList.add('clippy-show');
+}, 3500);
 
 function atualizarRelogio() {
     const agora = new Date();
@@ -31,8 +35,10 @@ if (btnIniciar && startMenu) {
     });
 }
 
-document.addEventListener('click', () => {
-    if(startMenu) startMenu.style.display = 'none';
+document.addEventListener('click', (e) => {
+    if(startMenu && !startMenu.contains(e.target) && e.target !== btnIniciar) {
+        startMenu.style.display = 'none';
+    }
 });
 
 window.fecharStartMenu = function() {
@@ -46,7 +52,6 @@ window.trazerParaFrente = function(janela) {
     janela.style.zIndex = zIndexCounter;
 }
 
-// LÓGICA DE ABRIR JANELAS E TROCAR ÍCONES PARA "ABERTO"
 window.abrirJanela = function(idJanela, idIcone = null) {
     const janela = document.getElementById(idJanela);
     if (janela) {
@@ -57,38 +62,26 @@ window.abrirJanela = function(idJanela, idIcone = null) {
         }, 10);
         trazerParaFrente(janela);
         
-        // Troca o ícone na área de trabalho para a versão aberta
         if (idIcone) {
             const imgElement = document.querySelector(`#${idIcone} img`);
             if (imgElement && imgElement.dataset.aberta) {
                 imgElement.src = imgElement.dataset.aberta;
             }
-            janela.dataset.iconeLigado = idIcone; // Salva quem a abriu para fechar depois
+            janela.dataset.iconeLigado = idIcone; 
         }
 
-        // Clippy reage à abertura da janela
         animarClippyAcao('abrir');
     }
 }
 
-// SOM DE CLIQUE IMEDIATO NAS PASTAS
-if (!document.getElementById('audio-pasta')) {
-    const audioElem = document.createElement('audio');
-    audioElem.id = 'audio-pasta';
-    audioElem.src = 'assets/songs/clique.mp3'; 
-    audioElem.preload = 'auto';
-    document.body.appendChild(audioElem);
-}
+const audioPasta = new Audio('assets/songs/clique.mp3');
+audioPasta.preload = 'auto';
 
 window.tocarSomPasta = function() {
-    const audio = document.getElementById('audio-pasta');
-    if(audio) {
-        audio.currentTime = 0; 
-        audio.play().catch(e => console.log("Som bloqueado pelo navegador."));
-    }
+    const somRapido = audioPasta.cloneNode();
+    somRapido.play().catch(() => {});
 }
 
-// LÓGICA DE FECHAR JANELAS E VOLTAR ÍCONES PARA "FECHADO"
 window.fecharJanela = function(idJanela) {
     const janela = document.getElementById(idJanela);
     if (janela) {
@@ -97,7 +90,6 @@ window.fecharJanela = function(idJanela) {
             janela.style.display = 'none';
         }, 250); 
         
-        // Retorna o ícone para a versão fechada
         const idIcone = janela.dataset.iconeLigado;
         if (idIcone) {
             const imgElement = document.querySelector(`#${idIcone} img`);
@@ -106,13 +98,11 @@ window.fecharJanela = function(idJanela) {
             }
         }
 
-        // Pausa música se fechar o player
         if(idJanela === 'janela-player') {
             const audio = document.getElementById('bg-audio');
             if(audio) audio.pause();
         }
 
-        // Clippy reage ao fechar
         animarClippyAcao('fechar');
     }
 }
@@ -123,9 +113,6 @@ janelas.forEach(janela => {
     janela.addEventListener('touchstart', () => trazerParaFrente(janela), {passive: true});
 });
 
-/* ==========================================
-   LÓGICA DO MEDIA PLAYER (COM NEXT/PREV)
-   ========================================== */
 const playlistMusicas = [
     'euphoria.mp3',
     'reflections.mp3'
@@ -155,7 +142,7 @@ function carregarMusica(index) {
 
 if(btnPlay && audio) {
     btnPlay.addEventListener('click', () => {
-        audio.play().catch(e => console.log("O autoplay pode estar bloqueado."));
+        audio.play().catch(() => {});
     });
 }
 
@@ -170,7 +157,7 @@ if(btnNext) {
         indiceMusicaAtual = (indiceMusicaAtual + 1) % playlistMusicas.length;
         carregarMusica(indiceMusicaAtual);
         if (!audio.paused) audio.play();
-        animarClippyAcao('musica'); // Clippy reage
+        animarClippyAcao('musica'); 
     });
 }
 
@@ -179,16 +166,12 @@ if(btnPrev) {
         indiceMusicaAtual = (indiceMusicaAtual - 1 + playlistMusicas.length) % playlistMusicas.length;
         carregarMusica(indiceMusicaAtual);
         if (!audio.paused) audio.play();
-        animarClippyAcao('musica'); // Clippy reage
+        animarClippyAcao('musica'); 
     });
 }
 
 carregarMusica(0);
 
-
-/* ==========================================
-   LÓGICA DO CLIPPY (Notificações, Hover e Clique Fora)
-   ========================================== */
 const clippyContainer = document.getElementById('clippy-container');
 const clippyBubble = document.getElementById('clippy-bubble');
 const clippyText = document.getElementById('clippy-text');
@@ -197,13 +180,14 @@ const clippyImg = document.getElementById('clippy-img');
 const clippyNotif = document.getElementById('clippy-notif');
 
 let clippyTimeout;
-let clippyState = 'idle'; // Pode ser 'idle', 'tip', ou 'menu'
+let clippyState = 'idle'; 
 
-// Função para animar o Clippy consoante a ação do utilizador
+const audioBalao = new Audio('assets/songs/balao.mp3');
+audioBalao.preload = 'auto';
+
 window.animarClippyAcao = function(acao) {
     if(!clippyImg) return;
     
-    // Reset rápido para permitir a mesma animação repetida
     clippyImg.className = 'clippy-img';
     void clippyImg.offsetWidth; 
     
@@ -215,7 +199,7 @@ window.animarClippyAcao = function(acao) {
 
 window.chamarClippy = function() {
     if(clippyContainer) {
-        clippyContainer.style.display = "flex";
+        clippyContainer.classList.add('clippy-show');
         abrirMenuClippy();
     }
 }
@@ -223,7 +207,7 @@ window.chamarClippy = function() {
 window.abrirMenuClippy = function() {
     clearTimeout(clippyTimeout); 
     clippyState = 'menu';
-    if(clippyNotif) clippyNotif.style.display = "none"; // Remove a notificação se ele abrir o menu
+    if(clippyNotif) clippyNotif.style.display = "none"; 
     
     if(clippyText) clippyText.textContent = "Como posso ajudar você hoje?";
     if(clippyOptions) clippyOptions.style.display = "block";
@@ -248,22 +232,18 @@ window.acaoClippy = function(acao) {
         animarClippyAcao('fechar');
         clippyState = 'idle';
         if(clippyBubble) clippyBubble.style.display = "none";
-        // O assistente fica na tela, apenas fecha o balão.
     }
 };
 
-// Nova lógica de fecho automático após 3 segundos
 function esconderClippyAposTempo(ms = 3000) {
     clearTimeout(clippyTimeout);
     clippyTimeout = setTimeout(() => {
         if(clippyState === 'tip') {
             if(clippyBubble) clippyBubble.style.display = 'none';
-            // A notificação visual (!) continua se havia uma dica que o utilizador ignorou
         }
     }, ms);
 }
 
-// Mantém o balão aberto se o rato estiver por cima
 if (clippyContainer) {
     clippyContainer.addEventListener('mouseenter', () => {
         if (clippyState === 'tip') {
@@ -274,26 +254,23 @@ if (clippyContainer) {
 
     clippyContainer.addEventListener('mouseleave', () => {
         if (clippyState === 'tip' && clippyBubble.style.display === 'block') {
-            esconderClippyAposTempo(3000); // Tenta fechar novamente após 3s
+            esconderClippyAposTempo(3000); 
         }
     });
 }
 
-// Fecha o balão de fala se clicar fora
 document.addEventListener('mousedown', (e) => {
     if (clippyContainer && !clippyContainer.contains(e.target)) {
         if (clippyBubble && clippyBubble.style.display === 'block') {
             clippyBubble.style.display = 'none';
-            clippyState = 'idle';
+            if (clippyState === 'menu') clippyState = 'idle';
         }
     }
 });
 
-// Lógica de Dicas Automáticas a cada 20s
 window.mostrarDicaClippy = function() {
-    if(!clippyBubble || !clippyText || !clippyOptions || clippyContainer.style.display === "none") return;
+    if(!clippyBubble || !clippyText || !clippyOptions || !clippyContainer.classList.contains("clippy-show")) return;
     
-    // Se o menu interativo estiver aberto, não chateia o utilizador
     if(clippyState === 'menu') return; 
     
     const dicas = [
@@ -309,22 +286,18 @@ window.mostrarDicaClippy = function() {
     clippyOptions.style.display = "none";
     clippyBubble.style.display = 'block';
     
-    if(clippyNotif) clippyNotif.style.display = 'flex'; // Exibe a bolinha de notificação!
+    if(clippyNotif) clippyNotif.style.display = 'block'; 
     
     clippyState = 'tip';
     animarClippyAcao('abrir');
+    audioBalao.cloneNode().play().catch(() => {});
 
-    esconderClippyAposTempo(3000); // Fecha após 3 segundos
+    esconderClippyAposTempo(3000); 
 }
 
-setTimeout(mostrarDicaClippy, 6000); // 1ª dica
-setInterval(mostrarDicaClippy, 20000); // Próximas dicas
+setTimeout(mostrarDicaClippy, 6000); 
+setInterval(mostrarDicaClippy, 15000);
 
-
-// ==========================================
-// SISTEMA DE ARRASTAR JANELAS (BUG CORRIGIDO)
-// ==========================================
-// Variáveis globais para as janelas do sistema
 let isDraggingWindow = false;
 let dragTarget = null;
 let winStartX, winStartY, winInitialLeft, winInitialTop;
@@ -343,7 +316,7 @@ function tornarArrastavel(elementoJanela) {
         
         trazerParaFrente(elementoJanela);
         animarClippyAcao('arrastar'); 
-        e.preventDefault(); // Previne seleção de texto
+        e.preventDefault(); 
     });
 }
 
@@ -353,7 +326,6 @@ document.querySelectorAll('.window-draggable').forEach(janela => {
     }
 });
 
-// Escuta os movimentos de rato na Janela Global (Evita perder o evento de largar)
 window.addEventListener('mousemove', (e) => {
     if (isDraggingWindow && dragTarget) {
         e.preventDefault();
@@ -363,7 +335,7 @@ window.addEventListener('mousemove', (e) => {
         let novoTopo = winInitialTop + dy;
         let novoEsquerda = winInitialLeft + dx;
 
-        if (novoTopo < 0) novoTopo = 0; // Trava contra fuga de ecrã (Cima)
+        if (novoTopo < 0) novoTopo = 0; 
 
         dragTarget.style.top = novoTopo + "px";
         dragTarget.style.left = novoEsquerda + "px";
@@ -375,8 +347,6 @@ window.addEventListener('mouseup', () => {
     dragTarget = null;
 });
 
-
-// Lógica de arrasto exclusiva e isolada para o Clippy
 let isClippyDragging = false;
 let hasMovedClippy = false;
 let clippyStartX, clippyStartY, clippyInitialLeft, clippyInitialTop;
@@ -397,7 +367,6 @@ if (clippyImg && clippyContainer) {
             let dx = e.clientX - clippyStartX;
             let dy = e.clientY - clippyStartY;
 
-            // Só considera arrasto se o rato mover mais que 3 píxeis (Diferencia clique de arrasto)
             if (Math.abs(dx) > 3 || Math.abs(dy) > 3) {
                 hasMovedClippy = true;
             }
@@ -420,8 +389,59 @@ if (clippyImg && clippyContainer) {
         if (isClippyDragging) {
             isClippyDragging = false;
             if (!hasMovedClippy) {
-                abrirMenuClippy(); // Se não moveu, foi um clique!
+                abrirMenuClippy(); 
             }
         }
     });
+}
+
+let idleTime = 0;
+let screensaverActive = false;
+let ssX = 0, ssY = 0, ssDx = 2, ssDy = 2;
+let reqAnim = null;
+const ssElement = document.getElementById('screensaver');
+const ssMover = document.getElementById('screensaver-mover');
+
+function resetIdleTimer() {
+    idleTime = 0;
+    if (screensaverActive) {
+        ssElement.style.display = 'none';
+        screensaverActive = false;
+        if(reqAnim) cancelAnimationFrame(reqAnim);
+    }
+}
+
+document.addEventListener('mousemove', resetIdleTimer);
+document.addEventListener('mousedown', resetIdleTimer);
+document.addEventListener('keypress', resetIdleTimer);
+document.addEventListener('touchstart', resetIdleTimer);
+
+setInterval(() => {
+    idleTime++;
+    if (idleTime >= 30 && !screensaverActive) {
+        ssElement.style.display = 'block';
+        screensaverActive = true;
+        
+        ssX = Math.random() * (window.innerWidth - 200);
+        ssY = Math.random() * (window.innerHeight - 100);
+        
+        animarScreensaver();
+    }
+}, 1000);
+
+function animarScreensaver() {
+    if (!screensaverActive || !ssMover) return;
+    
+    const rect = ssMover.getBoundingClientRect();
+    
+    ssX += ssDx;
+    ssY += ssDy;
+    
+    if (ssX + rect.width >= window.innerWidth || ssX <= 0) ssDx = -ssDx;
+    if (ssY + rect.height >= window.innerHeight || ssY <= 0) ssDy = -ssDy;
+    
+    ssMover.style.left = ssX + 'px';
+    ssMover.style.top = ssY + 'px';
+    
+    reqAnim = requestAnimationFrame(animarScreensaver);
 }
