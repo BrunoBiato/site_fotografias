@@ -9,12 +9,10 @@
 </head>
 <body>
 
-    <!-- TELA DE LOADING XP -->
     <div id="loading-screen">
         <div class="loading-center-box">
             <div class="loading-logo-container">
                 <img src="assets/images/pessoa.png" alt="Logo XP" class="xp-boot-logo" onerror="this.style.display='none'">
-                
                 <div class="loading-logo">
                     <div class="logo-text-stack">
                         <span class="ms">Bruno®</span>
@@ -23,7 +21,6 @@
                     <span class="xp">XP</span>
                 </div>
             </div>
-            
             <div class="loading-bar-container">
                 <div class="loading-blocks">
                     <div class="block"></div>
@@ -32,13 +29,11 @@
                 </div>
             </div>
         </div>
-
         <div class="loading-copyright">
             © 2026 Bruno Biato - Todos os direitos reservados.
         </div>
     </div>
 
-    <!-- SCREENSAVER (Descanso de Tela) -->
     <div id="screensaver">
         <div id="screensaver-mover">
             <img src="assets/images/pessoa.png" alt="Screensaver" onerror="this.style.display='none'">
@@ -46,59 +41,41 @@
         </div>
     </div>
 
-    <!-- FUNDO DA ÁREA DE TRABALHO -->
     <div class="bg-image"></div>
     <div class="bg-overlay"></div> 
 
-    <!-- ÁREA DOS ÍCONES (Desktop) -->
     <div class="desktop-area">
-        
         <div class="desktop-icon" id="icon-fotografias" onmousedown="window.tocarSomPasta()" onclick="abrirJanela('janela-fotografias', 'icon-fotografias')">
             <img src="assets/images/camera_pasta.png" data-fechada="assets/images/camera_pasta.png" data-aberta="assets/images/camera_pasta_aberta.png" alt="Olha as fotos!" onerror="if(this.src !== this.dataset.fechada) this.src = this.dataset.fechada;">
             <span class="icon-text">Fotografias</span>
         </div>
-
         <div class="desktop-icon" id="icon-projetos" onmousedown="window.tocarSomPasta()" onclick="abrirJanela('janela-projetos', 'icon-projetos')">
             <img src="assets/images/pasta.png" data-fechada="assets/images/pasta.png" data-aberta="assets/images/pasta_aberta.png" alt="Meus projetos!" onerror="if(this.src !== this.dataset.fechada) this.src = this.dataset.fechada;">
             <span class="icon-text">Projetos</span>
         </div>
-
         <div class="desktop-icon" id="icon-sobre" onmousedown="window.tocarSomPasta()" onclick="abrirJanela('janela-sobre', 'icon-sobre')">
             <img src="assets/images/blocodenotas.webp" data-fechada="assets/images/blocodenotas.webp" data-aberta="assets/images/blocodenotas_aberto.webp" alt="Sou eu!" onerror="if(this.src !== this.dataset.fechada) this.src = this.dataset.fechada;">
             <span class="icon-text">Sobre_mim.txt</span>
         </div>
-
         <div class="desktop-icon" id="icon-player" onmousedown="window.tocarSomPasta()" onclick="abrirJanela('janela-player', 'icon-player')">
             <img src="assets/images/mediaplayer.png" data-fechada="assets/images/mediaplayer.png" data-aberta="assets/images/mediaplayer_aberto.png" alt="Músicas!" onerror="if(this.src !== this.dataset.fechada) this.src = this.dataset.fechada;">
             <span class="icon-text">Media Player</span>
         </div>
-
     </div>
 
-    <!-- ASSISTENTE CLIPPY INTERATIVO -->
     <div id="clippy-container">
-        <!-- Ícone de Notificação Antigo -->
         <img src="assets/images/alerta.png" id="clippy-notif" class="clippy-notif" alt="!" style="display: none;" onerror="this.style.display='none'">
-        
         <div class="clippy-bubble" id="clippy-bubble">
             <p id="clippy-text">Olá!</p>
-            
-            <!-- Opções do Clippy -->
             <div id="clippy-options" style="display: none; margin-top: 10px;">
                 <button class="clippy-btn" onclick="acaoClippy('sobre')">O que é este site?</button>
                 <button class="clippy-btn" onclick="acaoClippy('musica')">Tocar uma música</button>
                 <button class="clippy-btn" onclick="acaoClippy('esconder')">Não preciso de ajuda agora</button>
             </div>
         </div>
-        <!-- Imagem do Clippy buscando na sua pasta local -->
         <img src="assets/images/clippy.png" alt="Clippy" class="clippy-img" id="clippy-img" onerror="this.style.display='none'">
     </div>
 
-    <!-- ==========================================
-         JANELAS DO SISTEMA
-         ========================================== -->
-
-    <!-- JANELA 1: FOTOGRAFIAS -->
     <div class="xp-window window-draggable" id="janela-fotografias" style="display: none;">
         <div class="xp-titlebar">
             <div class="xp-title">C:\Usuários\Imagens\Fotografias</div>
@@ -150,7 +127,6 @@
         </div>
     </div>
 
-    <!-- JANELA 2: PROJETOS -->
     <div class="xp-window window-draggable" id="janela-projetos" style="display: none;">
         <div class="xp-titlebar">
             <div class="xp-title">C:\Usuários\Documentos\Projetos</div>
@@ -165,7 +141,6 @@
         </div>
     </div>
 
-    <!-- JANELA 3: SOBRE MIM -->
     <div class="xp-window window-draggable" id="janela-sobre" style="display: none; max-width: 600px; height: 50vh;">
         <div class="xp-titlebar">
             <div class="xp-title">Sobre_mim.txt - Bloco de Notas</div>
@@ -189,7 +164,6 @@ Redes Sociais:
         </div>
     </div>
 
-    <!-- JANELA 4: MEDIA PLAYER -->
     <div class="xp-player window-draggable" id="janela-player" style="display: none;">
         <div class="xp-titlebar">
             <div class="xp-title">Media Player</div>
@@ -201,7 +175,6 @@ Redes Sociais:
             <div class="player-screen">
                 <marquee scrollamount="3" id="song-title">A reproduzir: euphoria.mp3</marquee>
             </div>
-            
             <div class="player-controls">
                 <button class="xp-btn-player" id="btn-prev">⏮</button>
                 <button class="xp-btn-player" id="btn-play">▶</button>
@@ -214,7 +187,6 @@ Redes Sociais:
         </div>
     </div>
 
-    <!-- MENU INICIAR -->
     <div class="start-menu" id="start-menu">
         <div class="start-menu-header">Visitante</div>
         <div class="start-menu-body">
@@ -228,7 +200,6 @@ Redes Sociais:
         </div>
     </div>
 
-    <!-- BARRA DE TAREFAS XP -->
     <div class="taskbar">
         <button class="start-btn" id="btn-iniciar"><span class="start-icon">❖</span> Iniciar</button>
         <div class="system-tray">

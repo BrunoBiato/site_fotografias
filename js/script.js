@@ -78,6 +78,7 @@ const audioPasta = new Audio('assets/songs/clique.mp3');
 audioPasta.preload = 'auto';
 
 window.tocarSomPasta = function() {
+    if (screensaverActive) return;
     const somRapido = audioPasta.cloneNode();
     somRapido.play().catch(() => {});
 }
@@ -181,6 +182,7 @@ const clippyNotif = document.getElementById('clippy-notif');
 
 let clippyTimeout;
 let clippyState = 'idle'; 
+let wasMusicPlaying = false;
 
 const audioBalao = new Audio('assets/songs/balao.mp3');
 audioBalao.preload = 'auto';
@@ -269,6 +271,7 @@ document.addEventListener('mousedown', (e) => {
 });
 
 window.mostrarDicaClippy = function() {
+    if(screensaverActive) return;
     if(!clippyBubble || !clippyText || !clippyOptions || !clippyContainer.classList.contains("clippy-show")) return;
     
     if(clippyState === 'menu') return; 
@@ -408,6 +411,11 @@ function resetIdleTimer() {
         ssElement.style.display = 'none';
         screensaverActive = false;
         if(reqAnim) cancelAnimationFrame(reqAnim);
+
+        const bgAudio = document.getElementById('bg-audio');
+        if (wasMusicPlaying && bgAudio) {
+            bgAudio.play().catch(()=>{});
+        }
     }
 }
 
@@ -422,6 +430,16 @@ setInterval(() => {
         ssElement.style.display = 'block';
         screensaverActive = true;
         
+        const bgAudio = document.getElementById('bg-audio');
+        if (bgAudio && !bgAudio.paused) {
+            wasMusicPlaying = true;
+            bgAudio.pause();
+        } else {
+            wasMusicPlaying = false;
+        }
+
+        if(clippyBubble) clippyBubble.style.display = 'none';
+
         ssX = Math.random() * (window.innerWidth - 200);
         ssY = Math.random() * (window.innerHeight - 100);
         
