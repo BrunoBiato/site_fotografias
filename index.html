@@ -751,18 +751,18 @@
         }
 
         .current-avatar-container {
-            width: 76px;
-            height: 76px;
-            border: 2px solid #fff;
-            border-right-color: #aca899;
-            border-bottom-color: #aca899;
+            width: 54px;
+            height: 54px;
+            border: 2px inset #fff;
+            border-right-color: #ccc;
+            border-bottom-color: #ccc;
             background: #fff;
             cursor: pointer;
             position: relative;
-            padding: 2px;
             flex-shrink: 0;
             box-sizing: border-box;
             animation: avatar-glow 2s infinite;
+            overflow: hidden;
         }
         
         .current-avatar-container:hover {
@@ -774,26 +774,23 @@
             height: 100%;
             object-fit: cover;
             display: block;
-            border: 1px solid #7f9db9;
         }
 
         .change-avatar-text {
             position: absolute;
-            bottom: 3px;
-            left: 3px;
-            width: calc(100% - 6px);
+            bottom: 0;
+            left: 0;
+            width: 100%;
             height: 18px;
-            background: #ff8c00; 
+            background: rgba(0, 0, 0, 0.7); 
             color: #fff;
-            font-size: 10px;
+            font-size: 9px;
             font-weight: bold;
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: Tahoma, sans-serif;
             pointer-events: none;
-            border-top: 1px solid #fff;
-            text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
         }
 
         .current-avatar-container:active {
@@ -802,16 +799,17 @@
             border-bottom-color: #fff;
         }
 
+        /* GRID DE SELEÇÃO DE AVATAR MAIOR */
         .avatar-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
+            gap: 15px; /* Aumentado para mais respiro */
             background: #fff;
-            padding: 10px;
+            padding: 15px; /* Aumentado */
             border: 2px inset #fff;
             border-right-color: #ccc;
             border-bottom-color: #ccc;
-            max-height: 180px;
+            max-height: 320px; /* Aumentado significativamente para caber mais e maior */
             overflow-y: auto;
         }
 
@@ -830,28 +828,32 @@
 
         .emoji-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 28px);
+            justify-content: center; 
             gap: 4px;
             background: #fff;
             border: 2px inset #fff;
             border-right-color: #ccc;
             border-bottom-color: #ccc;
-            padding: 6px;
+            padding: 8px;
         }
 
         .emoji-grid span {
             cursor: pointer;
-            padding: 4px;
+            width: 28px;
+            height: 28px;
             display: flex;
             justify-content: center;
             align-items: center;
-            border: 1px solid transparent;
+            border: 1px solid #e5e5e5; 
+            background-color: #fff;
         }
 
         .emoji-grid img {
-            width: 24px;
-            height: 24px;
+            max-width: 18px; 
+            max-height: 18px;
             pointer-events: none;
+            object-fit: contain;
         }
 
         .emoji-grid span:hover {
@@ -945,7 +947,6 @@
         </div>
     </div>
 
-    <!-- ASSISTENTE CLIPPY RENOVADO E CORRIGIDO -->
     <div id="clippy-container">
         <img src="assets/images/alerta.png" id="clippy-notif" class="clippy-notif" alt="!" style="display: none;" onerror="this.style.display='none'">
         <div class="clippy-bubble" id="clippy-bubble">
@@ -1076,7 +1077,7 @@ Redes Sociais:<br>
 
     <div class="xp-window window-draggable" id="janela-comentarios" style="display: none; max-width: 500px; height: 60vh;">
         <div class="xp-titlebar">
-            <div class="xp-title" ondblclick="window.ativarAdmin()" title="Duplo clique para gerir"><img src="assets/images/mensagens.png" style="width:14px; height:14px; margin-right:4px;" onerror="this.style.display='none'"> C:\Utilitários\Mural_de_Recados.exe</div>
+            <div class="xp-title"><img src="assets/images/mensagens.png" style="width:14px; height:14px; margin-right:4px;" onerror="this.style.display='none'"> C:\Utilitários\Mural_de_Recados.exe</div>
             <div class="xp-controls">
                 <button class="xp-btn xp-btn-min" onclick="fecharJanela('janela-comentarios')">_</button>
                 <button class="xp-btn xp-btn-max">□</button>
@@ -1109,8 +1110,8 @@ Redes Sociais:<br>
         </div>
     </div>
 
-    <!-- JANELA POPUP DE SELEÇÃO DE ÍCONE -->
-    <div id="avatar-picker-window" class="xp-window window-draggable" style="display: none; position: absolute; top: 20vh; left: 35vw; width: 340px; height: auto; z-index: 10001;">
+    <!-- JANELA DE SELEÇÃO DE ÍCONE AUMENTADA -->
+    <div id="avatar-picker-window" class="xp-window window-draggable" style="display: none; position: absolute; top: 15vh; left: 30vw; width: 460px; height: auto; z-index: 10001;">
         <div class="xp-titlebar">
             <div class="xp-title"><img src="assets/images/mensagens.png" style="width:14px; height:14px; margin-right:4px;" onerror="this.style.display='none'"> Selecione o seu Ícone</div>
             <div class="xp-controls">
@@ -1136,8 +1137,7 @@ Redes Sociais:<br>
         </div>
     </div>
 
-    <!-- JANELA POPUP DE EMOJIS ANTIGOS -->
-    <div id="emoji-picker-window" class="xp-window window-draggable" style="display: none; position: absolute; top: 40vh; left: 45vw; width: 140px; height: auto; z-index: 10002;">
+    <div id="emoji-picker-window" class="xp-window window-draggable" style="display: none; position: absolute; top: 40vh; left: 45vw; width: 170px; height: auto; z-index: 10002;">
         <div class="xp-titlebar">
             <div class="xp-title"><img src="assets/images/mensagens.png" style="width:14px; height:14px; margin-right:4px;" onerror="this.style.display='none'"> Emoticons</div>
             <div class="xp-controls">
@@ -1146,9 +1146,13 @@ Redes Sociais:<br>
         </div>
         <div class="xp-content" style="padding: 10px; background: #ece9d8;">
             <div class="emoji-grid">
-                <span onclick="window.inserirEmoji(':smile:')" title=":smile:"><img src="assets/images/smile.gif" onerror="this.outerHTML='🙂'"></span>
-                <span onclick="window.inserirEmoji(':banana:')" title=":banana:"><img src="assets/images/banana.gif" onerror="this.outerHTML='🍌'"></span>
-                <span onclick="window.inserirEmoji(':tchau:')" title=":tchau:"><img src="assets/images/tchau.gif" onerror="this.outerHTML='👋'"></span>
+                <span onclick="window.inserirEmoji(':smile:')" title=":smile:"><img src="assets/images/emojis/smile.gif" onerror="this.outerHTML='🙂'"></span>
+                <span onclick="window.inserirEmoji(':banana:')" title=":banana:"><img src="assets/images/emojis/banana.gif" onerror="this.outerHTML='🍌'"></span>
+                <span onclick="window.inserirEmoji(':tchau:')" title=":tchau:"><img src="assets/images/emojis/tchau.gif" onerror="this.outerHTML='👋'"></span>
+                <span onclick="window.inserirEmoji(':cupido:')" title=":cupido:"><img src="assets/images/emojis/cupido.gif" onerror="this.outerHTML='💘'"></span>
+                <span onclick="window.inserirEmoji(':balaoCoracao:')" title=":balaoCoracao:"><img src="assets/images/emojis/balaoCoracao.gif" onerror="this.outerHTML='🎈'"></span>
+                <span onclick="window.inserirEmoji(':coracaoGrande:')" title=":coracaoGrande:"><img src="assets/images/emojis/coracaoGrande.gif" onerror="this.outerHTML='💖'"></span>
+                <span onclick="window.inserirEmoji(':palmas:')" title=":palmas:"><img src="assets/images/emojis/palmas.gif" onerror="this.outerHTML='👏'"></span>
             </div>
         </div>
     </div>
@@ -1614,16 +1618,12 @@ Redes Sociais:<br>
 
         let db, auth, currentUser, appId;
         let comentariosSalvos = [];
-        let isAdmin = false;
         let avatarSelecionado = "assets/images/pessoa.png";
 
         const comentariosMemoria = [
             { nome: "Visitante", texto: "Nossa, que nostalgia desse layout! :)", foto: "assets/images/pessoa.png", timestamp: Date.now() }
         ];
 
-        // =========================================
-        // FILTRO DE PALAVRAS DE BAIXO CALÃO
-        // =========================================
         const palavrasProibidas = [
             'merda', 'porra', 'caralho', 'buceta', 'puta', 'foder', 'fuder',
             'cu', 'arrombado', 'babaca', 'cacete', 'piroca', 'pica', 'viado', 'estupro',
@@ -1635,7 +1635,6 @@ Redes Sociais:<br>
             let textoCensurado = texto;
             
             palavrasProibidas.forEach(palavra => {
-                // Regex com \b garante que vai pegar apenas a palavra inteira
                 const regex = new RegExp('\\b' + palavra + '\\b', 'gi');
                 const censura = '*'.repeat(palavra.length);
                 textoCensurado = textoCensurado.replace(regex, censura);
@@ -1710,12 +1709,15 @@ Redes Sociais:<br>
             return `${data.getDate()}/${data.getMonth()+1}/${data.getFullYear()}`;
         }
 
-        // Conversor de Emojis do MSN
         function parseEmojis(text) {
             const emojiMap = {
                 ':smile:': 'smile.gif',
                 ':banana:': 'banana.gif',
-                ':tchau:': 'tchau.gif'
+                ':tchau:': 'tchau.gif',
+                ':cupido:': 'cupido.gif',
+                ':balaoCoracao:': 'balaoCoracao.gif',
+                ':coracaoGrande:': 'coracaoGrande.gif',
+                ':palmas:': 'palmas.gif'
             };
             
             let div = document.createElement('div');
@@ -1725,7 +1727,7 @@ Redes Sociais:<br>
             for (const [code, file] of Object.entries(emojiMap)) {
                 const safeCode = code.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
                 const regex = new RegExp(safeCode, 'g');
-                safeText = safeText.replace(regex, `<img src="assets/images/${file}" class="inline-emoji" alt="${code}" onerror="this.style.display='none'">`);
+                safeText = safeText.replace(regex, `<img src="assets/images/emojis/${file}" class="inline-emoji" alt="${code}" onerror="this.style.display='none'">`);
             }
             return safeText;
         }
@@ -1738,11 +1740,6 @@ Redes Sociais:<br>
             lista.forEach(c => {
                 const item = document.createElement('div');
                 item.className = 'comment-item';
-                
-                let btnApagar = '';
-                if (isAdmin && c.id) {
-                    btnApagar = `<button class="btn-delete-comment" onclick="window.deletarComentario('${c.id}')" title="Apagar recado">❌</button>`;
-                }
 
                 item.innerHTML = `
                     <div class="comment-avatar">
@@ -1753,7 +1750,6 @@ Redes Sociais:<br>
                             <span>${c.nome}</span>
                             <div style="display:flex; align-items:center; gap:5px;">
                                 <span class="comment-date">${formatarData(c.timestamp)}</span>
-                                ${btnApagar}
                             </div>
                         </div>
                         <div class="comment-text">${parseEmojis(c.texto)}</div>
@@ -1763,28 +1759,6 @@ Redes Sociais:<br>
             });
             listEl.scrollTop = listEl.scrollHeight;
         }
-
-        window.ativarAdmin = function() {
-            const senha = prompt("Área de Gestão.\nInsira a senha:");
-            if (senha === "admin123") {
-                isAdmin = true;
-                alert("Modo Admin ativado! Pode apagar comentários.");
-                renderizarComentarios(comentariosSalvos);
-            } else if (senha !== null) {
-                alert("Senha incorreta.");
-            }
-        };
-
-        window.deletarComentario = async function(idComentario) {
-            if (!confirm("Tem a certeza que quer apagar este recado para sempre?")) return;
-            
-            try {
-                const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'comments', idComentario);
-                await deleteDoc(docRef);
-            } catch (e) {
-                alert("Erro ao apagar. Tem certeza que o banco de dados está online?");
-            }
-        };
 
         window.abrirSeletorAvatar = function() {
             const picker = document.getElementById('avatar-picker-window');
@@ -1849,7 +1823,6 @@ Redes Sociais:<br>
                 return;
             }
 
-            // Aplica o filtro de palavras no nome e no texto
             nome = censurarTexto(nome);
             texto = censurarTexto(texto);
 
