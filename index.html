@@ -462,7 +462,6 @@
         }
         .xp-btn-player:active { border-style: inset; padding: 5px 14px 3px 16px; }
 
-        /* CLIPPY CONTAINER CORRIGIDO */
         #clippy-container {
             position: fixed;
             bottom: 60px; 
@@ -1052,7 +1051,10 @@ Aqui estão alguns de meus trabalhos, fotografias, textos e projetos pessoais.<b
 
 Redes Sociais:<br>
 - Instagram: <a href="https://instagram.com/bbbiato" target="_blank">@bbbiato</a><br>
-- GitHub: <a href="https://github.com/BrunoBiato" target="_blank">@BrunoBiato</a>
+- GitHub: <a href="https://github.com/BrunoBiato" target="_blank">@BrunoBiato</a><br>
+- TikTok: <a href="https://www.tiktok.com/@bbbiato" target="_blank">@bbbiato</a><br>
+- Letterboxd: <a href="https://letterboxd.com/Biato/" target="_blank">Biato</a><br>
+- Spotify: <a href="https://open.spotify.com/user/ndjxteaz10yx0fjfjfc5btel2?si=5bd42063e95c4ca3" target="_blank">Bruno Biato</a>
             </div>
         </div>
     </div>
@@ -1627,6 +1629,29 @@ Redes Sociais:<br>
             { nome: "Visitante", texto: "Nossa, que nostalgia desse layout! :)", foto: "assets/images/pessoa.png", timestamp: Date.now() }
         ];
 
+        // =========================================
+        // FILTRO DE PALAVRAS DE BAIXO CALÃO
+        // =========================================
+        const palavrasProibidas = [
+            'merda', 'porra', 'caralho', 'buceta', 'puta', 'foder', 'fuder',
+            'cu', 'arrombado', 'babaca', 'cacete', 'piroca', 'pica', 'viado', 'estupro',
+            'autista', 'homofóbico', 'fracassado'
+        ];
+
+        function censurarTexto(texto) {
+            if (!texto) return texto;
+            let textoCensurado = texto;
+            
+            palavrasProibidas.forEach(palavra => {
+                // Regex com \b garante que vai pegar apenas a palavra inteira
+                const regex = new RegExp('\\b' + palavra + '\\b', 'gi');
+                const censura = '*'.repeat(palavra.length);
+                textoCensurado = textoCensurado.replace(regex, censura);
+            });
+            
+            return textoCensurado;
+        }
+
         async function initCloudDB() {
             try {
                 let finalConfig = myFirebaseConfig;
@@ -1823,14 +1848,18 @@ Redes Sociais:<br>
             const nomeInput = document.getElementById('comment-name');
             const textoInput = document.getElementById('comment-text');
             
-            const nome = nomeInput.value.trim();
-            const texto = textoInput.value.trim();
+            let nome = nomeInput.value.trim();
+            let texto = textoInput.value.trim();
 
             if(!nome || !texto) {
                 errorMsg.style.color = "red";
                 errorMsg.textContent = "Preencha o seu nome e escreva uma mensagem!";
                 return;
             }
+
+            // Aplica o filtro de palavras no nome e no texto
+            nome = censurarTexto(nome);
+            texto = censurarTexto(texto);
 
             const now = Date.now();
 
