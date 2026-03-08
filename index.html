@@ -462,13 +462,14 @@
         }
         .xp-btn-player:active { border-style: inset; padding: 5px 14px 3px 16px; }
 
+        /* CLIPPY CONTAINER CORRIGIDO */
         #clippy-container {
             position: fixed;
-            bottom: 50px; 
-            right: 20px;
+            bottom: 60px; 
+            right: 30px;
             z-index: 9999;
-            width: 60px;
-            height: 60px;
+            width: 90px;
+            height: 90px;
             transform: scale(0);
             transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
         }
@@ -478,26 +479,30 @@
         }
 
         .clippy-img {
-            width: 60px;
+            width: 90px;
             height: auto;
-            filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.5));
+            filter: drop-shadow(3px 4px 5px rgba(0,0,0,0.6));
             cursor: pointer;
             position: absolute;
             bottom: 0;
             right: 0;
             z-index: 2;
         }
+        
+        .clippy-img:active {
+            cursor: grabbing;
+        }
 
         .clippy-notif {
             position: absolute;
-            top: -5px;
-            right: -10px;
-            width: 24px;
+            top: -15px;
+            right: -5px;
+            width: 32px;
             height: auto;
             z-index: 10000;
             animation: clippy-pulse 1.5s infinite;
             pointer-events: none;
-            filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.5));
+            filter: drop-shadow(1px 2px 3px rgba(0,0,0,0.6));
         }
 
         @keyframes clippy-pulse {
@@ -534,16 +539,16 @@
             background: #ffffe1; 
             border: 1px solid black;
             border-radius: 8px;
-            padding: 10px;
-            width: 200px;
-            font-size: 12px;
+            padding: 12px;
+            width: 220px; 
+            font-size: 13px; 
             font-family: Tahoma, sans-serif;
             color: black;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+            box-shadow: 2px 2px 6px rgba(0,0,0,0.4);
             position: absolute;
             bottom: 20px;
-            right: 75px;
-            display: none;
+            right: 105px;
+            display: none; 
             z-index: 1;
         }
 
@@ -576,11 +581,11 @@
             background-color: #fff;
             border: 1px solid #7a98af;
             border-radius: 3px;
-            padding: 4px 6px;
+            padding: 5px 8px;
             margin-bottom: 5px;
             cursor: pointer;
             font-family: Tahoma, sans-serif;
-            font-size: 11px;
+            font-size: 12px;
             transition: background-color 0.2s;
         }
 
@@ -684,7 +689,6 @@
             word-break: break-word;
         }
 
-        /* Classe para os emojis nas mensagens rendidas */
         .inline-emoji {
             width: 20px;
             height: 20px;
@@ -741,6 +745,12 @@
             align-items: center;
         }
 
+        @keyframes avatar-glow {
+            0% { box-shadow: 0 0 0 0 rgba(255, 140, 0, 0.7); }
+            50% { box-shadow: 0 0 10px 4px rgba(255, 140, 0, 0.9); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 140, 0, 0); }
+        }
+
         .current-avatar-container {
             width: 76px;
             height: 76px;
@@ -753,6 +763,11 @@
             padding: 2px;
             flex-shrink: 0;
             box-sizing: border-box;
+            animation: avatar-glow 2s infinite;
+        }
+        
+        .current-avatar-container:hover {
+            animation: none; 
         }
 
         .current-avatar-container img {
@@ -769,14 +784,17 @@
             left: 3px;
             width: calc(100% - 6px);
             height: 18px;
-            background: rgba(0, 0, 0, 0.65);
+            background: #ff8c00; 
             color: #fff;
             font-size: 10px;
+            font-weight: bold;
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: Tahoma, sans-serif;
             pointer-events: none;
+            border-top: 1px solid #fff;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
         }
 
         .current-avatar-container:active {
@@ -928,6 +946,7 @@
         </div>
     </div>
 
+    <!-- ASSISTENTE CLIPPY RENOVADO E CORRIGIDO -->
     <div id="clippy-container">
         <img src="assets/images/alerta.png" id="clippy-notif" class="clippy-notif" alt="!" style="display: none;" onerror="this.style.display='none'">
         <div class="clippy-bubble" id="clippy-bubble">
@@ -954,40 +973,48 @@
         <div class="xp-content">
             <div class="photo-grid">
                 <div class="photo-wrapper">
-                    <img src="assets/images/fotografia_liberdade.jpg" alt="fotografia_liberdade">
-                    <div class="photo-label">flashinglights.jpg</div>
+                    <img src="assets/images/aviao.png" alt="aviao">
+                    <div class="photo-label">aviao.png</div>
                 </div>
                 <div class="photo-wrapper">
-                    <img src="assets/images/fotografia_fantasmas.jpg" alt="fotografia_fantasmas">
-                    <div class="photo-label">buuuu.png</div>
+                    <img src="assets/images/cachorro.png" alt="cachorro">
+                    <div class="photo-label">cachorro.png</div>
                 </div>
                 <div class="photo-wrapper">
-                    <img src="assets/images/fotografia_lunatic.jpg" alt="fotografia_lunatic">
-                    <div class="photo-label">lunatico.jpg</div>
+                    <img src="assets/images/cadeiraPraia.png" alt="cadeiraPraia">
+                    <div class="photo-label">cadeiraPraia.png</div>
                 </div>
                 <div class="photo-wrapper">
-                    <img src="assets/images/fotografia_lua.png" alt="fotografia_lua">
-                    <div class="photo-label">mooooon.png</div>
+                    <img src="assets/images/cavalos.png" alt="cavalos">
+                    <div class="photo-label">cavalos.png</div>
                 </div>
                 <div class="photo-wrapper">
-                    <img src="assets/images/fotografia_terceiro.jpg" alt="fotografia_terceiro">
-                    <div class="photo-label">evangelion.png</div>
+                    <img src="assets/images/coqueiro.png" alt="coqueiro">
+                    <div class="photo-label">coqueiro.png</div>
                 </div>
                 <div class="photo-wrapper">
-                    <img src="assets/images/fotografia_pixacao.jpg" alt="fotografia_pixacao">
-                    <div class="photo-label">violencia.jpg</div>
+                    <img src="assets/images/flor.png" alt="flor">
+                    <div class="photo-label">flor.png</div>
                 </div>
                 <div class="photo-wrapper">
-                    <img src="assets/images/fotografia_autoretrato.jpg" alt="fotografia_autoretrato">
-                    <div class="photo-label">retrato.jpg</div>
+                    <img src="assets/images/karate.png" alt="karate">
+                    <div class="photo-label">karate.png</div>
                 </div>
                 <div class="photo-wrapper">
-                    <img src="assets/images/fotografia_cerveja.png" alt="fotografia_cerveja">
-                    <div class="photo-label">beeer.png</div>
+                    <img src="assets/images/moto.png" alt="moto">
+                    <div class="photo-label">moto.png</div>
                 </div>
                 <div class="photo-wrapper">
-                    <img src="assets/images/fotografia_rosas.png" alt="fotografia_rosas">
-                    <div class="photo-label">rosas_de_sangue.png</div>
+                    <img src="assets/images/olhoGato.png" alt="olhoGato">
+                    <div class="photo-label">olhoGato.png</div>
+                </div>
+                <div class="photo-wrapper">
+                    <img src="assets/images/pato.png" alt="pato">
+                    <div class="photo-label">pato.png</div>
+                </div>
+                <div class="photo-wrapper">
+                    <img src="assets/images/xadrez.png" alt="xadrez">
+                    <div class="photo-label">xadrez.png</div>
                 </div>
             </div>
         </div>
@@ -1072,7 +1099,7 @@ Redes Sociais:<br>
                 <div class="comment-inputs">
                     <div class="current-avatar-container" onclick="window.abrirSeletorAvatar()" title="Escolher Ícone">
                         <img id="current-avatar-preview" src="assets/images/pessoa.png" alt="Ícone" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👤</text></svg>'">
-                        <div class="change-avatar-text">Mudar</div>
+                        <div class="change-avatar-text">📷 Trocar</div>
                     </div>
                     <div class="comment-text-area-wrapper">
                         <input type="text" id="comment-name" placeholder="Seu nome..." maxlength="20">
