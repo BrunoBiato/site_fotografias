@@ -631,6 +631,10 @@
             margin-bottom: 15px;
         }
 
+        .comments-list::-webkit-scrollbar { width: 16px; }
+        .comments-list::-webkit-scrollbar-track { background: rgba(240, 240, 240, 0.6); border-left: 1px solid #ccc; }
+        .comments-list::-webkit-scrollbar-thumb { background: #cdced1; border: 1px solid #eee; box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #999; }
+
         .comment-item {
             display: flex;
             gap: 12px;
@@ -666,19 +670,6 @@
             font-weight: normal;
             font-size: 10px;
             color: #666;
-        }
-
-        .btn-delete-comment {
-            background: transparent;
-            border: none;
-            color: #cc0000;
-            cursor: pointer;
-            font-size: 12px;
-            margin-left: 5px;
-        }
-
-        .btn-delete-comment:hover {
-            transform: scale(1.2);
         }
 
         .comment-text {
@@ -799,17 +790,16 @@
             border-bottom-color: #fff;
         }
 
-        /* GRID DE SELEÇÃO DE AVATAR MAIOR */
         .avatar-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 15px; /* Aumentado para mais respiro */
+            gap: 10px;
             background: #fff;
-            padding: 15px; /* Aumentado */
+            padding: 10px;
             border: 2px inset #fff;
             border-right-color: #ccc;
             border-bottom-color: #ccc;
-            max-height: 320px; /* Aumentado significativamente para caber mais e maior */
+            max-height: 180px;
             overflow-y: auto;
         }
 
@@ -1094,7 +1084,7 @@ Redes Sociais:<br>
                 <div class="comment-inputs">
                     <div class="current-avatar-container" onclick="window.abrirSeletorAvatar()" title="Escolher Ícone">
                         <img id="current-avatar-preview" src="assets/images/pessoa.png" alt="Ícone" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👤</text></svg>'">
-                        <div class="change-avatar-text">📷 Trocar</div>
+                        <div class="change-avatar-text">Mudar</div>
                     </div>
                     <div class="comment-text-area-wrapper">
                         <input type="text" id="comment-name" placeholder="Seu nome..." maxlength="20">
@@ -1110,8 +1100,7 @@ Redes Sociais:<br>
         </div>
     </div>
 
-    <!-- JANELA DE SELEÇÃO DE ÍCONE AUMENTADA -->
-    <div id="avatar-picker-window" class="xp-window window-draggable" style="display: none; position: absolute; top: 15vh; left: 30vw; width: 460px; height: auto; z-index: 10001;">
+    <div id="avatar-picker-window" class="xp-window window-draggable" style="display: none; position: absolute; top: 20vh; left: 35vw; width: 340px; height: auto; z-index: 10001;">
         <div class="xp-titlebar">
             <div class="xp-title"><img src="assets/images/mensagens.png" style="width:14px; height:14px; margin-right:4px;" onerror="this.style.display='none'"> Selecione o seu Ícone</div>
             <div class="xp-controls">
@@ -1643,6 +1632,11 @@ Redes Sociais:<br>
             return textoCensurado;
         }
 
+        function contemLink(texto) {
+            const regexLinks = /(https?:\/\/[^\s]+)|(www\.[^\s]+)|([a-zA-Z0-9-]+\.[a-zA-Z]{2,}(\/[^\s]*)?)/gi;
+            return regexLinks.test(texto);
+        }
+
         async function initCloudDB() {
             try {
                 let finalConfig = myFirebaseConfig;
@@ -1702,6 +1696,14 @@ Redes Sociais:<br>
             }, (error) => {
                 renderizarComentarios(comentariosMemoria);
             });
+        }
+
+        function isMesmoDia(data1, data2) {
+            const d1 = new Date(data1);
+            const d2 = new Date(data2);
+            return d1.getFullYear() === d2.getFullYear() &&
+                   d1.getMonth() === d2.getMonth() &&
+                   d1.getDate() === d2.getDate();
         }
 
         function formatarData(tempo) {
@@ -1823,6 +1825,12 @@ Redes Sociais:<br>
                 return;
             }
 
+            if (contemLink(nome) || contemLink(texto)) {
+                errorMsg.style.color = "red";
+                errorMsg.textContent = "Oops! Para a segurança da nossa comunidade, não permitimos links externos. Escreva apenas texto, por favor! 🛡️😊";
+                return;
+            }
+
             nome = censurarTexto(nome);
             texto = censurarTexto(texto);
 
@@ -1835,8 +1843,7 @@ Redes Sociais:<br>
                 return;
             }
 
-            const umDia = 24 * 60 * 60 * 1000;
-            const jaComentouHoje = comentariosSalvos.some(c => c.uid === currentUser.uid && (now - c.timestamp) < umDia);
+            const jaComentouHoje = comentariosSalvos.some(c => c.uid === currentUser.uid && isMesmoDia(now, c.timestamp));
 
             if (jaComentouHoje) {
                 errorMsg.style.color = "red";
