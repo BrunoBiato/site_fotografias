@@ -847,7 +847,23 @@ Redes Sociais:<br>
             <div id="clock">00:00</div>
         </div>
     </div>
-<script src="https://cdn.jsdelivr.net/npm/leo-profanity/dist/leo-profanity.min.js"></script>
+    < src="https://cdn.jsdelivr.net/npm/leo-profanity/dist/leo-profanity.min.js"></script>
+    
+    <script>
+    setTimeout(() => {
+        const loadingScreen = document.getElementById('loading-screen');
+        if (loadingScreen) {
+            loadingScreen.style.opacity = '0';
+            setTimeout(() => { loadingScreen.style.display = 'none'; }, 500);
+        }
+    }, 3000);
+
+    setTimeout(() => {
+        const clippyCont = document.getElementById('clippy-container');
+        if (clippyCont) clippyCont.classList.add('clippy-show');
+    }, 3500);
+    </script>
+    
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
@@ -886,20 +902,6 @@ Redes Sociais:<br>
             div.textContent = String(str).trim().slice(0, maxLen);
             return div.innerHTML; 
         }
-
-        setTimeout(() => {
-            const loadingScreen = document.getElementById('loading-screen');
-            if (loadingScreen) {
-                loadingScreen.style.opacity = '0';
-                setTimeout(() => { loadingScreen.style.display = 'none'; }, 500);
-            }
-        }, 3000);
-
-        setTimeout(() => {
-            const clippyCont = document.getElementById('clippy-container');
-            if (clippyCont) clippyCont.classList.add('clippy-show');
-        }, 3500);
-
         function atualizarRelogio() {
             const agora = new Date();
             let horas = agora.getHours();
