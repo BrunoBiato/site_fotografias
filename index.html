@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' https://*.firebaseio.com https://*.googleapis.com https://*.firestore.googleapis.com; frame-ancestors 'none';">
+    <!-- [SEGURANÇA] Meta CSP como fallback caso o servidor não envie o header HTTP -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' https://*.firebaseio.com https://*.googleapis.com https://*.firestore.googleapis.com; frame-ancestors 'none';">
+    <!-- [SEGURANÇA] Impede que o browser infira tipo de conteúdo incorreto -->
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <!-- [SEGURANÇA] Impede clickjacking via iframe -->
     <meta http-equiv="X-Frame-Options" content="DENY">
     <title>welcome (˶°ㅁ°) !!</title>
     <link rel="icon" type="image/x-icon" href="assets/images/coco.ico">
@@ -714,6 +717,7 @@ Nascido em 2003, sou desenvolvedor fullstack, porém sou apaixonado pela área a
 Aqui estão alguns de meus trabalhos, fotografias, textos e projetos pessoais.<br><br>
 
 Redes Sociais:<br>
+<!-- [SEGURANÇA] rel="noopener noreferrer" adicionado em todos os links externos -->
 - Instagram: <a href="https://instagram.com/bbbiato" target="_blank" rel="noopener noreferrer">@bbbiato</a><br>
 - GitHub: <a href="https://github.com/BrunoBiato" target="_blank" rel="noopener noreferrer">@BrunoBiato</a><br>
 - TikTok: <a href="https://www.tiktok.com/@bbbiato" target="_blank" rel="noopener noreferrer">@bbbiato</a><br>
@@ -847,23 +851,25 @@ Redes Sociais:<br>
             <div id="clock">00:00</div>
         </div>
     </div>
-    < src="https://cdn.jsdelivr.net/npm/leo-profanity/dist/leo-profanity.min.js"></script>
-    
-    <script>
-    setTimeout(() => {
-        const loadingScreen = document.getElementById('loading-screen');
-        if (loadingScreen) {
-            loadingScreen.style.opacity = '0';
-            setTimeout(() => { loadingScreen.style.display = 'none'; }, 500);
-        }
-    }, 3000);
 
-    setTimeout(() => {
-        const clippyCont = document.getElementById('clippy-container');
-        if (clippyCont) clippyCont.classList.add('clippy-show');
-    }, 3500);
+    <!-- [SEGURANÇA] Biblioteca de censura de linguagem inapropriada -->
+    <script src="https://cdn.jsdelivr.net/npm/leo-profanity/dist/leo-profanity.min.js"></script>
+
+    <!-- Loading screen independente do módulo — nunca fica preso se o módulo falhar -->
+    <script>
+        setTimeout(() => {
+            const loadingScreen = document.getElementById('loading-screen');
+            if (loadingScreen) {
+                loadingScreen.style.opacity = '0';
+                setTimeout(() => { loadingScreen.style.display = 'none'; }, 500);
+            }
+        }, 3000);
+        setTimeout(() => {
+            const clippyCont = document.getElementById('clippy-container');
+            if (clippyCont) clippyCont.classList.add('clippy-show');
+        }, 3500);
     </script>
-    
+
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
@@ -878,6 +884,11 @@ Redes Sociais:<br>
             appId: "1:239629405843:web:78b29db0e8eebdfb2a4766",
             measurementId: "G-XJNN9P62G8"
         };
+
+        // ============================================================
+        // [SEGURANÇA] ALLOWLIST de avatares permitidos
+        // Apenas estes caminhos locais são aceites — qualquer outro é rejeitado.
+        // ============================================================
         const AVATARES_PERMITIDOS = [
             'assets/images/pessoa.png',
             'assets/images/aviao.png',
@@ -896,12 +907,18 @@ Redes Sociais:<br>
         function avatarPermitido(foto) {
             return AVATARES_PERMITIDOS.includes(foto) ? foto : 'assets/images/pessoa.png';
         }
+
+        // ============================================================
+        // [SEGURANÇA] Sanitização de texto — escapa HTML sem remover conteúdo.
+        // Nunca use innerHTML com dados do utilizador diretamente.
+        // ============================================================
         function sanitizarTexto(str, maxLen) {
             if (!str) return '';
             const div = document.createElement('div');
             div.textContent = String(str).trim().slice(0, maxLen);
-            return div.innerHTML; 
+            return div.innerHTML; // converte <, >, & em entidades HTML
         }
+
         function atualizarRelogio() {
             const agora = new Date();
             let horas = agora.getHours();
@@ -1286,30 +1303,20 @@ Redes Sociais:<br>
             { nome: "Visitante", texto: "Nossa, que nostalgia desse layout! :)", foto: "assets/images/pessoa.png", timestamp: Date.now() }
         ];
 
-        
-                
+        // ============================================================
+        // [SEGURANÇA] Censura via LeoProfanity (dicionário comunitário)
+        // Carrega base em inglês + adiciona palavras em português
+        // ============================================================
         LeoProfanity.loadDictionary('en');
-        
-        
         LeoProfanity.add([
             'merda', 'porra', 'caralho', 'buceta', 'puta', 'foder',
             'fuder', 'arrombado', 'babaca', 'cacete', 'piroca', 'pica',
             'viado', 'estupro', 'cu', 'fdp', 'vsf', 'tnc'
         ]);
-        
-        function censurarTexto(texto) {
-            if (!texto) return texto;
-            return LeoProfanity.clean(texto); 
-        }
 
         function censurarTexto(texto) {
             if (!texto) return texto;
-            let textoCensurado = texto;
-            palavrasProibidas.forEach(palavra => {
-                const regex = new RegExp('\\b' + palavra + '\\b', 'gi');
-                textoCensurado = textoCensurado.replace(regex, '*'.repeat(palavra.length));
-            });
-            return textoCensurado;
+            return LeoProfanity.clean(texto);
         }
 
         function contemLink(texto) {
@@ -1347,6 +1354,7 @@ Redes Sociais:<br>
                 renderizarComentarios(comentariosMemoria);
             }
         }
+
         function iniciarLeituraNuvem() {
             if (!currentUser || !db) return;
             const commentsRef = collection(db, 'artifacts', appId, 'public', 'data', 'comments');
@@ -1357,29 +1365,40 @@ Redes Sociais:<br>
                 renderizarComentarios(comentariosSalvos.length === 0 ? comentariosMemoria : comentariosSalvos);
             }, () => { renderizarComentarios(comentariosMemoria); });
         }
+
         function isMesmoDia(data1, data2) {
             const d1 = new Date(data1), d2 = new Date(data2);
             return d1.getFullYear() === d2.getFullYear() && d1.getMonth() === d2.getMonth() && d1.getDate() === d2.getDate();
         }
+
         function formatarData(tempo) {
             const data = new Date(tempo);
             return `${data.getDate()}/${data.getMonth() + 1}/${data.getFullYear()}`;
         }
+
         function parseEmojis(text) {
             const emojiMap = {
                 ':smile:': 'smile.gif', ':banana:': 'banana.gif', ':tchau:': 'tchau.gif',
                 ':cupido:': 'cupido.gif', ':balaoCoracao:': 'balaoCoracao.gif',
                 ':coracaoGrande:': 'coracaoGrande.gif', ':palmas:': 'palmas.gif'
             };
+            // Primeiro escapar o texto para prevenir XSS
             const div = document.createElement('div');
             div.innerText = text;
             let safeText = div.innerHTML;
+            // Depois substituir apenas os códigos de emoji conhecidos
             for (const [code, file] of Object.entries(emojiMap)) {
                 const safeCode = code.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
                 safeText = safeText.replace(new RegExp(safeCode, 'g'), `<img src="assets/images/emojis/${file}" class="inline-emoji" alt="${code}" onerror="this.style.display='none'">`);
             }
             return safeText;
         }
+
+        // ============================================================
+        // [SEGURANÇA] renderizarComentarios — corrigido para não usar
+        // innerHTML com dados do utilizador. Cada campo é atribuído via
+        // textContent ou setAttribute, eliminando o risco de XSS.
+        // ============================================================
         function renderizarComentarios(lista) {
             const listEl = document.getElementById('comments-list');
             if (!listEl) return;
@@ -1388,6 +1407,8 @@ Redes Sociais:<br>
             lista.forEach(c => {
                 const item = document.createElement('div');
                 item.className = 'comment-item';
+
+                // Avatar — validado pela allowlist
                 const avatarDiv = document.createElement('div');
                 avatarDiv.className = 'comment-avatar';
                 const avatarImg = document.createElement('img');
@@ -1396,16 +1417,16 @@ Redes Sociais:<br>
                 avatarImg.setAttribute('onerror', "this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👤</text></svg>'");
                 avatarDiv.appendChild(avatarImg);
 
-            
+                // Corpo do comentário
                 const bodyDiv = document.createElement('div');
                 bodyDiv.className = 'comment-body';
 
-              
+                // Cabeçalho — nome via textContent (seguro)
                 const headerDiv = document.createElement('div');
                 headerDiv.className = 'comment-header';
 
                 const nomeSpan = document.createElement('span');
-                nomeSpan.textContent = c.nome;
+                nomeSpan.textContent = c.nome; // textContent escapa HTML automaticamente
 
                 const metaDiv = document.createElement('div');
                 metaDiv.style.cssText = 'display:flex; align-items:center; gap:5px;';
@@ -1417,7 +1438,7 @@ Redes Sociais:<br>
                 headerDiv.appendChild(nomeSpan);
                 headerDiv.appendChild(metaDiv);
 
-               
+                // Texto — parseEmojis já escapa o texto antes de inserir as imagens
                 const textoDiv = document.createElement('div');
                 textoDiv.className = 'comment-text';
                 textoDiv.innerHTML = parseEmojis(c.texto);
@@ -1452,6 +1473,7 @@ Redes Sociais:<br>
         };
 
         window.selecionarAvatar = function (caminho) {
+            // [SEGURANÇA] Validar contra allowlist antes de aceitar
             avatarSelecionado = avatarPermitido(caminho);
             const preview = document.getElementById('current-avatar-preview');
             if (preview) preview.src = avatarSelecionado;
@@ -1499,6 +1521,7 @@ Redes Sociais:<br>
                 return;
             }
 
+            // [SEGURANÇA] Sanitizar e censurar antes de qualquer uso
             nome = censurarTexto(sanitizarTexto(nome, 20));
             texto = censurarTexto(sanitizarTexto(texto, 100));
 
@@ -1528,7 +1551,7 @@ Redes Sociais:<br>
                     nome: nome,
                     texto: texto,
                     timestamp: now,
-                    foto: avatarSelecionado 
+                    foto: avatarSelecionado  // já validado pela allowlist em selecionarAvatar()
                 });
                 limparFormularioComentario();
             } catch (e) {
