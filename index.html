@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' https://*.firebaseio.com https://*.googleapis.com https://*.firestore.googleapis.com; frame-ancestors 'none';">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
     <title>welcome (˶°ㅁ°) !!</title>
     <link rel="icon" type="image/x-icon" href="assets/images/coco.ico">
     <style>
@@ -38,17 +41,17 @@
             flex-direction: column;
             align-items: center;
             gap: 80px;
-            margin-top: -60px; 
+            margin-top: -60px;
         }
 
         .loading-logo-container {
             display: flex;
             align-items: center;
-            gap: 20px; 
+            gap: 20px;
         }
 
         .xp-boot-logo {
-            width: 130px; 
+            width: 130px;
             height: auto;
             filter: drop-shadow(0 0 10px rgba(255,255,255,0.1));
         }
@@ -56,7 +59,7 @@
         .loading-logo {
             font-family: 'Franklin Gothic Medium', 'Trebuchet MS', Arial, sans-serif;
             display: flex;
-            align-items: flex-end; 
+            align-items: flex-end;
             gap: 10px;
         }
 
@@ -64,37 +67,18 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            line-height: 1; 
+            line-height: 1;
         }
 
-        .loading-logo .ms { 
-            color: white; 
-            font-size: 18px; 
-            font-weight: normal; 
-            padding-left: 2px; 
-            margin-bottom: 2px; 
-        }
-
-        .loading-logo .win { 
-            color: white; 
-            font-size: 50px; 
-            font-weight: bold; 
-        }
-
-        .loading-logo .xp { 
-            color: #ff6b00; 
-            font-size: 55px; 
-            font-weight: bold; 
-            font-style: italic; 
-            line-height: 0.8; 
-            padding-bottom: 2px; 
-        }
+        .loading-logo .ms { color: white; font-size: 18px; font-weight: normal; padding-left: 2px; margin-bottom: 2px; }
+        .loading-logo .win { color: white; font-size: 50px; font-weight: bold; }
+        .loading-logo .xp { color: #ff6b00; font-size: 55px; font-weight: bold; font-style: italic; line-height: 0.8; padding-bottom: 2px; }
 
         .loading-bar-container {
             width: 180px;
             height: 20px;
-            border: 2px solid #a5a5a5; 
-            border-radius: 6px; 
+            border: 2px solid #a5a5a5;
+            border-radius: 6px;
             padding: 1px;
             position: relative;
             overflow: hidden;
@@ -126,17 +110,15 @@
         .loading-copyright {
             position: absolute;
             bottom: 30px;
-            color: #b0b0b0; 
+            color: #b0b0b0;
             font-family: Tahoma, sans-serif;
             font-size: 12px;
         }
 
         #screensaver {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
             background-color: black;
             z-index: 10000000;
             display: none;
@@ -150,24 +132,12 @@
             pointer-events: none;
         }
 
-        #screensaver-mover img {
-            width: 80px;
-            height: auto;
-            filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));
-        }
-
-        #screensaver-mover span {
-            color: white;
-            font-family: 'Trebuchet MS', Arial, sans-serif;
-            font-size: 32px;
-            font-weight: bold;
-            font-style: italic;
-        }
+        #screensaver-mover img { width: 80px; height: auto; filter: drop-shadow(0 0 10px rgba(255,255,255,0.2)); }
+        #screensaver-mover span { color: white; font-family: 'Trebuchet MS', Arial, sans-serif; font-size: 32px; font-weight: bold; font-style: italic; }
 
         .bg-image {
             position: fixed;
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             background: url('assets/images/praia_windows.jpg') no-repeat center center;
             background-size: cover;
             z-index: -3;
@@ -175,11 +145,9 @@
 
         .bg-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(79, 172, 254, 0.2) 50%, rgba(0, 242, 254, 0.15) 100%);
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(79,172,254,0.2) 50%, rgba(0,242,254,0.15) 100%);
             z-index: -2;
             pointer-events: none;
         }
@@ -209,26 +177,10 @@
             border-radius: 4px;
         }
 
-        .desktop-icon:hover {
-            background-color: rgba(255, 255, 255, 0.15);
-            border: 1px dotted rgba(255, 255, 255, 0.4);
-        }
-
-        .desktop-icon:active {
-            background-color: rgba(49, 106, 197, 0.7); 
-            border: 1px dotted rgba(255, 255, 255, 0.8);
-        }
-
-        .desktop-icon img {
-            width: 48px;
-            height: 48px;
-            margin-bottom: 5px;
-            filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.5));
-        }
-
-        .desktop-icon:active img {
-            filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.8)) brightness(0.8);
-        }
+        .desktop-icon:hover { background-color: rgba(255,255,255,0.15); border: 1px dotted rgba(255,255,255,0.4); }
+        .desktop-icon:active { background-color: rgba(49,106,197,0.7); border: 1px dotted rgba(255,255,255,0.8); }
+        .desktop-icon img { width: 48px; height: 48px; margin-bottom: 5px; filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.5)); }
+        .desktop-icon:active img { filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.8)) brightness(0.8); }
 
         .icon-text {
             font-size: 12px;
@@ -240,10 +192,8 @@
 
         .taskbar {
             position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 35px;
+            bottom: 0; left: 0;
+            width: 100%; height: 35px;
             background: linear-gradient(to bottom, #245edb 0%, #3f8cf3 9%, #245edb 18%, #245edb 92%, #333 100%);
             display: flex;
             justify-content: space-between;
@@ -294,8 +244,7 @@
         .start-menu {
             display: none;
             position: absolute;
-            bottom: 35px;
-            left: 0;
+            bottom: 35px; left: 0;
             width: 250px;
             background-color: #fff;
             border: 2px solid #0055e5;
@@ -320,17 +269,14 @@
 
         .xp-window, .xp-player {
             position: absolute;
-            top: 10vh;
-            left: 15vw;
-            width: 70vw;
-            max-width: 1000px;
-            height: 75vh;
+            top: 10vh; left: 15vw;
+            width: 70vw; max-width: 1000px; height: 75vh;
             background-color: #ece9d8;
             border: 3px solid #0055e5;
             border-radius: 8px 8px 0 0;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
             z-index: 10;
             overflow: hidden;
             opacity: 0;
@@ -338,16 +284,11 @@
             transition: opacity 0.25s cubic-bezier(.68,-0.55,.27,1.55), transform 0.25s cubic-bezier(.68,-0.55,.27,1.55);
         }
 
-        .xp-window.popup-active, .xp-player.popup-active {
-            opacity: 1;
-            transform: scale(1);
-        }
+        .xp-window.popup-active, .xp-player.popup-active { opacity: 1; transform: scale(1); }
 
         .xp-player {
-            width: 300px;
-            height: auto;
-            top: 15vh;
-            left: 60vw;
+            width: 300px; height: auto;
+            top: 15vh; left: 60vw;
         }
 
         .xp-window::before {
@@ -401,15 +342,14 @@
 
         .xp-content {
             flex: 1;
-            overflow-y: auto;
-            overflow-x: hidden;
+            overflow-y: auto; overflow-x: hidden;
             padding: 30px 40px;
             position: relative;
             z-index: 2;
         }
 
         .xp-content::-webkit-scrollbar { width: 16px; }
-        .xp-content::-webkit-scrollbar-track { background: rgba(240, 240, 240, 0.6); border-left: 1px solid #ccc; }
+        .xp-content::-webkit-scrollbar-track { background: rgba(240,240,240,0.6); border-left: 1px solid #ccc; }
         .xp-content::-webkit-scrollbar-thumb { background: #cdced1; border: 1px solid #eee; box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #999; }
 
         .photo-grid {
@@ -429,105 +369,66 @@
             cursor: crosshair;
         }
 
-        .photo-wrapper img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            border: 1px solid #ddd;
-            display: block;
-            background-color: #f4f4f4;
-        }
-
-        .photo-label {
-            text-align: center; margin-top: 8px; font-size: 13px; color: #000;
-            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-        }
+        .photo-wrapper img { width: 100%; height: 220px; object-fit: cover; border: 1px solid #ddd; display: block; background-color: #f4f4f4; }
+        .photo-label { text-align: center; margin-top: 8px; font-size: 13px; color: #000; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
         .photo-wrapper:hover {
             transform: scale(1.35); z-index: 10;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 255, 255, 0.6);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4), 0 0 20px rgba(255,255,255,0.6);
         }
 
         .player-content { padding: 15px 10px; display: flex; flex-direction: column; gap: 15px; }
 
         .player-screen {
-            background-color: #000; color: #0f0; font-family: 'Courier New', monospace; font-size: 12px;
-            padding: 6px; border: 2px inset #fff; border-right-color: #ccc; border-bottom-color: #ccc; overflow: hidden;
+            background-color: #000; color: #0f0;
+            font-family: 'Courier New', monospace; font-size: 12px;
+            padding: 6px; border: 2px inset #fff; border-right-color: #ccc; border-bottom-color: #ccc;
+            overflow: hidden;
         }
 
         .player-controls { display: flex; justify-content: space-around; margin-top: 5px; }
+
         .xp-btn-player {
-            padding: 4px 15px; font-size: 16px; cursor: pointer; background: #ece9d8;
-            border: 2px outset #fff; border-right-color: #888; border-bottom-color: #888; color: #000;
+            padding: 4px 15px; font-size: 16px; cursor: pointer;
+            background: #ece9d8; border: 2px outset #fff; border-right-color: #888; border-bottom-color: #888; color: #000;
         }
         .xp-btn-player:active { border-style: inset; padding: 5px 14px 3px 16px; }
 
         #clippy-container {
             position: fixed;
-            bottom: 60px; 
-            right: 30px;
+            bottom: 60px; right: 30px;
             z-index: 9999;
-            width: 90px;
-            height: 90px;
+            width: 90px; height: 90px;
             transform: scale(0);
             transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
         }
 
-        #clippy-container.clippy-show {
-            transform: scale(1);
-        }
+        #clippy-container.clippy-show { transform: scale(1); }
 
         .clippy-img {
-            width: 90px;
-            height: auto;
+            width: 90px; height: auto;
             filter: drop-shadow(3px 4px 5px rgba(0,0,0,0.6));
             cursor: pointer;
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            z-index: 2;
+            position: absolute; bottom: 0; right: 0; z-index: 2;
         }
-        
-        .clippy-img:active {
-            cursor: grabbing;
-        }
+
+        .clippy-img:active { cursor: grabbing; }
 
         .clippy-notif {
             position: absolute;
-            top: -15px;
-            right: -5px;
-            width: 32px;
-            height: auto;
+            top: -15px; right: -5px;
+            width: 32px; height: auto;
             z-index: 10000;
             animation: clippy-pulse 1.5s infinite;
             pointer-events: none;
             filter: drop-shadow(1px 2px 3px rgba(0,0,0,0.6));
         }
 
-        @keyframes clippy-pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.15); }
-            100% { transform: scale(1); }
-        }
-
-        @keyframes clippy-jump {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
-        @keyframes clippy-shake {
-            0%, 100% { transform: translateX(0) rotate(0); }
-            25% { transform: translateX(-5px) rotate(-10deg); }
-            75% { transform: translateX(5px) rotate(10deg); }
-        }
-        @keyframes clippy-think {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.15); }
-        }
-        @keyframes clippy-nod {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(15deg); }
-            75% { transform: rotate(-15deg); }
-        }
+        @keyframes clippy-pulse { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
+        @keyframes clippy-jump { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        @keyframes clippy-shake { 0%, 100% { transform: translateX(0) rotate(0); } 25% { transform: translateX(-5px) rotate(-10deg); } 75% { transform: translateX(5px) rotate(10deg); } }
+        @keyframes clippy-think { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+        @keyframes clippy-nod { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(15deg); } 75% { transform: rotate(-15deg); } }
 
         .anim-jump { animation: clippy-jump 0.5s ease; }
         .anim-shake { animation: clippy-shake 0.4s ease; }
@@ -535,72 +436,42 @@
         .anim-nod { animation: clippy-nod 0.5s ease; }
 
         .clippy-bubble {
-            background: #ffffe1; 
-            border: 1px solid black;
-            border-radius: 8px;
-            padding: 12px;
-            width: 220px; 
-            font-size: 13px; 
-            font-family: Tahoma, sans-serif;
-            color: black;
+            background: #ffffe1; border: 1px solid black; border-radius: 8px;
+            padding: 12px; width: 220px; font-size: 13px;
+            font-family: Tahoma, sans-serif; color: black;
             box-shadow: 2px 2px 6px rgba(0,0,0,0.4);
-            position: absolute;
-            bottom: 20px;
-            right: 105px;
-            display: none; 
-            z-index: 1;
+            position: absolute; bottom: 20px; right: 105px;
+            display: none; z-index: 1;
         }
 
         .clippy-bubble::after {
             content: '';
-            position: absolute;
-            top: 50%;
-            right: -10px;
-            margin-top: -5px;
-            border-width: 5px 0 5px 10px;
-            border-style: solid;
+            position: absolute; top: 50%; right: -10px; margin-top: -5px;
+            border-width: 5px 0 5px 10px; border-style: solid;
             border-color: transparent transparent transparent #ffffe1;
         }
 
         .clippy-bubble::before {
             content: '';
-            position: absolute;
-            top: 50%;
-            right: -11px;
-            margin-top: -6px;
-            border-width: 6px 0 6px 12px;
-            border-style: solid;
+            position: absolute; top: 50%; right: -11px; margin-top: -6px;
+            border-width: 6px 0 6px 12px; border-style: solid;
             border-color: transparent transparent transparent #000;
         }
 
         .clippy-btn {
-            display: block;
-            width: 100%;
-            text-align: left;
-            background-color: #fff;
-            border: 1px solid #7a98af;
-            border-radius: 3px;
-            padding: 5px 8px;
-            margin-bottom: 5px;
-            cursor: pointer;
-            font-family: Tahoma, sans-serif;
-            font-size: 12px;
+            display: block; width: 100%; text-align: left;
+            background-color: #fff; border: 1px solid #7a98af; border-radius: 3px;
+            padding: 5px 8px; margin-bottom: 5px; cursor: pointer;
+            font-family: Tahoma, sans-serif; font-size: 12px;
             transition: background-color 0.2s;
         }
-
-        .clippy-btn:hover {
-            background-color: #d3e5f5;
-        }
+        .clippy-btn:hover { background-color: #d3e5f5; }
 
         .notepad-content {
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             padding: 15px;
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-            overflow-y: auto;
-            color: #000;
-            cursor: text;
+            font-family: 'Courier New', monospace; font-size: 14px;
+            overflow-y: auto; color: #000; cursor: text;
         }
 
         .notepad-content a {
@@ -608,265 +479,104 @@
             text-decoration: underline;
             cursor: pointer;
         }
+        .notepad-content a:hover { color: #FF0000; }
 
-        .notepad-content a:hover {
-            color: #FF0000;
-        }
-
-        .comments-container {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            padding: 20px;
-        }
+        .comments-container { display: flex; flex-direction: column; height: 100%; padding: 20px; }
 
         .comments-list {
-            flex: 1;
-            overflow-y: auto;
+            flex: 1; overflow-y: auto;
             background: #fff;
-            border: 2px inset #fff;
-            border-right-color: #ccc;
-            border-bottom-color: #ccc;
-            padding: 15px;
-            margin-bottom: 15px;
+            border: 2px inset #fff; border-right-color: #ccc; border-bottom-color: #ccc;
+            padding: 15px; margin-bottom: 15px;
         }
 
         .comments-list::-webkit-scrollbar { width: 16px; }
-        .comments-list::-webkit-scrollbar-track { background: rgba(240, 240, 240, 0.6); border-left: 1px solid #ccc; }
+        .comments-list::-webkit-scrollbar-track { background: rgba(240,240,240,0.6); border-left: 1px solid #ccc; }
         .comments-list::-webkit-scrollbar-thumb { background: #cdced1; border: 1px solid #eee; box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #999; }
 
-        .comment-item {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 15px;
-            border-bottom: 1px dashed #ccc;
-            padding-bottom: 10px;
-        }
-
-        .comment-avatar img {
-            width: 45px;
-            height: 45px;
-            border: 1px solid #999;
-            border-radius: 3px;
-            background: #ece9d8;
-            object-fit: cover;
-        }
-
-        .comment-body {
-            flex: 1;
-        }
-
-        .comment-header {
-            font-family: Tahoma, sans-serif;
-            font-weight: bold;
-            font-size: 13px;
-            color: #003399;
-            margin-bottom: 4px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .comment-date {
-            font-weight: normal;
-            font-size: 10px;
-            color: #666;
-        }
-
-        .comment-text {
-            font-family: Tahoma, sans-serif;
-            font-size: 13px;
-            color: #333;
-            word-break: break-word;
-        }
-
-        .inline-emoji {
-            width: 20px;
-            height: 20px;
-            vertical-align: text-bottom;
-        }
+        .comment-item { display: flex; gap: 12px; margin-bottom: 15px; border-bottom: 1px dashed #ccc; padding-bottom: 10px; }
+        .comment-avatar img { width: 45px; height: 45px; border: 1px solid #999; border-radius: 3px; background: #ece9d8; object-fit: cover; }
+        .comment-body { flex: 1; }
+        .comment-header { font-family: Tahoma, sans-serif; font-weight: bold; font-size: 13px; color: #003399; margin-bottom: 4px; display: flex; justify-content: space-between; }
+        .comment-date { font-weight: normal; font-size: 10px; color: #666; }
+        .comment-text { font-family: Tahoma, sans-serif; font-size: 13px; color: #333; word-break: break-word; }
+        .inline-emoji { width: 20px; height: 20px; vertical-align: text-bottom; }
 
         .comment-form-container {
-            background: #ece9d8;
-            padding: 10px;
+            background: #ece9d8; padding: 10px;
             border: 2px groove #fff;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            position: relative;
+            display: flex; flex-direction: column; gap: 8px; position: relative;
         }
 
-        .comment-inputs {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
+        .comment-inputs { display: flex; gap: 10px; align-items: center; }
 
-        .comment-text-area-wrapper {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-            flex: 1;
-        }
+        .comment-text-area-wrapper { display: flex; flex-direction: column; gap: 5px; flex: 1; }
 
         .comment-inputs input, .comment-inputs textarea {
-            font-family: Tahoma, sans-serif;
-            font-size: 12px;
-            padding: 6px;
-            border: 2px inset #fff;
-            border-right-color: #ccc;
-            border-bottom-color: #ccc;
-            outline: none;
+            font-family: Tahoma, sans-serif; font-size: 12px; padding: 6px;
+            border: 2px inset #fff; border-right-color: #ccc; border-bottom-color: #ccc; outline: none;
         }
 
-        .comment-inputs input {
-            width: 100%;
-            height: 24px;
-        }
+        .comment-inputs input { width: 100%; height: 24px; }
+        .comment-inputs textarea { width: 100%; height: 43px; resize: none; }
 
-        .comment-inputs textarea {
-            width: 100%;
-            height: 43px;
-            resize: none;
-        }
-
-        .comment-actions {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+        .comment-actions { display: flex; justify-content: space-between; align-items: center; }
 
         @keyframes avatar-glow {
-            0% { box-shadow: 0 0 0 0 rgba(255, 140, 0, 0.7); }
-            50% { box-shadow: 0 0 10px 4px rgba(255, 140, 0, 0.9); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 140, 0, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(255,140,0,0.7); }
+            50% { box-shadow: 0 0 10px 4px rgba(255,140,0,0.9); }
+            100% { box-shadow: 0 0 0 0 rgba(255,140,0,0); }
         }
 
         .current-avatar-container {
-            width: 54px;
-            height: 54px;
-            border: 2px inset #fff;
-            border-right-color: #ccc;
-            border-bottom-color: #ccc;
-            background: #fff;
-            cursor: pointer;
-            position: relative;
-            flex-shrink: 0;
+            width: 54px; height: 54px;
+            border: 2px inset #fff; border-right-color: #ccc; border-bottom-color: #ccc;
+            background: #fff; cursor: pointer; position: relative; flex-shrink: 0;
             box-sizing: border-box;
-            animation: avatar-glow 2s infinite;
-            overflow: hidden;
-        }
-        
-        .current-avatar-container:hover {
-            animation: none; 
+            animation: avatar-glow 2s infinite; overflow: hidden;
         }
 
-        .current-avatar-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
+        .current-avatar-container:hover { animation: none; }
+        .current-avatar-container img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .current-avatar-container:active { border: 2px solid #aca899; border-right-color: #fff; border-bottom-color: #fff; }
 
         .change-avatar-text {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 18px;
-            background: rgba(0, 0, 0, 0.7); 
-            color: #fff;
-            font-size: 9px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: Tahoma, sans-serif;
-            pointer-events: none;
-        }
-
-        .current-avatar-container:active {
-            border: 2px solid #aca899;
-            border-right-color: #fff;
-            border-bottom-color: #fff;
+            position: absolute; bottom: 0; left: 0; width: 100%; height: 18px;
+            background: rgba(0,0,0,0.7); color: #fff; font-size: 9px; font-weight: bold;
+            display: flex; align-items: center; justify-content: center;
+            font-family: Tahoma, sans-serif; pointer-events: none;
         }
 
         .avatar-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            background: #fff;
-            padding: 10px;
-            border: 2px inset #fff;
-            border-right-color: #ccc;
-            border-bottom-color: #ccc;
-            max-height: 180px;
-            overflow-y: auto;
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+            background: #fff; padding: 10px;
+            border: 2px inset #fff; border-right-color: #ccc; border-bottom-color: #ccc;
+            max-height: 180px; overflow-y: auto;
         }
 
-        .avatar-grid img {
-            width: 100%;
-            aspect-ratio: 1;
-            object-fit: cover;
-            border: 1px solid transparent;
-            cursor: pointer;
-        }
-
-        .avatar-grid img:hover {
-            border: 1px solid #0055e5;
-            background: #d3e5f5;
-        }
+        .avatar-grid img { width: 100%; aspect-ratio: 1; object-fit: cover; border: 1px solid transparent; cursor: pointer; }
+        .avatar-grid img:hover { border: 1px solid #0055e5; background: #d3e5f5; }
 
         .emoji-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 28px);
-            justify-content: center; 
-            gap: 4px;
+            display: grid; grid-template-columns: repeat(4, 28px); justify-content: center; gap: 4px;
             background: #fff;
-            border: 2px inset #fff;
-            border-right-color: #ccc;
-            border-bottom-color: #ccc;
+            border: 2px inset #fff; border-right-color: #ccc; border-bottom-color: #ccc;
             padding: 8px;
         }
 
         .emoji-grid span {
-            cursor: pointer;
-            width: 28px;
-            height: 28px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 1px solid #e5e5e5; 
-            background-color: #fff;
+            cursor: pointer; width: 28px; height: 28px;
+            display: flex; justify-content: center; align-items: center;
+            border: 1px solid #e5e5e5; background-color: #fff;
         }
 
-        .emoji-grid img {
-            max-width: 18px; 
-            max-height: 18px;
-            pointer-events: none;
-            object-fit: contain;
-        }
-
-        .emoji-grid span:hover {
-            border: 1px solid #316ac5;
-            background-color: #c1d2ee;
-        }
-
-        .emoji-grid span:active {
-            background-color: #a3c2ea;
-        }
+        .emoji-grid img { max-width: 18px; max-height: 18px; pointer-events: none; object-fit: contain; }
+        .emoji-grid span:hover { border: 1px solid #316ac5; background-color: #c1d2ee; }
+        .emoji-grid span:active { background-color: #a3c2ea; }
 
         @media (max-width: 768px) {
-            .xp-window {
-                width: 95vw !important; 
-                height: 75vh !important;
-                top: 5vh !important;
-                left: 2.5vw !important;
-            }
-            .xp-player {
-                width: 90vw !important;
-                left: 5vw !important;
-                top: 10vh !important;
-            }
+            .xp-window { width: 95vw !important; height: 75vh !important; top: 5vh !important; left: 2.5vw !important; }
+            .xp-player { width: 90vw !important; left: 5vw !important; top: 10vh !important; }
             .xp-content { padding: 15px; }
             .photo-grid { grid-template-columns: repeat(auto-fill, minmax(100%, 1fr)); }
             .photo-wrapper:hover { transform: scale(1.05); }
@@ -899,9 +609,7 @@
                 </div>
             </div>
         </div>
-        <div class="loading-copyright">
-            © 2026 Bruno Biato
-        </div>
+        <div class="loading-copyright">© 2026 Bruno Biato</div>
     </div>
 
     <div id="screensaver">
@@ -912,7 +620,7 @@
     </div>
 
     <div class="bg-image"></div>
-    <div class="bg-overlay"></div> 
+    <div class="bg-overlay"></div>
 
     <div class="desktop-area">
         <div class="desktop-icon" id="icon-fotografias" onmousedown="window.tocarSomPasta()" onclick="abrirJanela('janela-fotografias', 'icon-fotografias')">
@@ -962,42 +670,15 @@
         </div>
         <div class="xp-content">
             <div class="photo-grid">
-                <div class="photo-wrapper">
-                    <img src="assets/images/fotografia_liberdade.jpg" alt="fotografia_liberdade">
-                    <div class="photo-label">flashinglights.jpg</div>
-                </div>
-                <div class="photo-wrapper">
-                    <img src="assets/images/fotografia_fantasmas.jpg" alt="fotografia_fantasmas">
-                    <div class="photo-label">buuuu.png</div>
-                </div>
-                <div class="photo-wrapper">
-                    <img src="assets/images/fotografia_lunatic.jpg" alt="fotografia_lunatic">
-                    <div class="photo-label">lunatico.jpg</div>
-                </div>
-                <div class="photo-wrapper">
-                    <img src="assets/images/fotografia_lua.png" alt="fotografia_lua">
-                    <div class="photo-label">mooooon.png</div>
-                </div>
-                <div class="photo-wrapper">
-                    <img src="assets/images/fotografia_terceiro.jpg" alt="fotografia_terceiro">
-                    <div class="photo-label">evangelion.png</div>
-                </div>
-                <div class="photo-wrapper">
-                    <img src="assets/images/fotografia_pixacao.jpg" alt="fotografia_pixacao">
-                    <div class="photo-label">violencia.jpg</div>
-                </div>
-                <div class="photo-wrapper">
-                    <img src="assets/images/fotografia_autoretrato.jpg" alt="fotografia_autoretrato">
-                    <div class="photo-label">retrato.jpg</div>
-                </div>
-                <div class="photo-wrapper">
-                    <img src="assets/images/fotografia_cerveja.png" alt="fotografia_cerveja">
-                    <div class="photo-label">beeer.png</div>
-                </div>
-                <div class="photo-wrapper">
-                    <img src="assets/images/fotografia_rosas.png" alt="fotografia_rosas">
-                    <div class="photo-label">rosas_de_sangue.png</div>
-                </div>
+                <div class="photo-wrapper"><img src="assets/images/fotografia_liberdade.jpg" alt="fotografia_liberdade"><div class="photo-label">flashinglights.jpg</div></div>
+                <div class="photo-wrapper"><img src="assets/images/fotografia_fantasmas.jpg" alt="fotografia_fantasmas"><div class="photo-label">buuuu.png</div></div>
+                <div class="photo-wrapper"><img src="assets/images/fotografia_lunatic.jpg" alt="fotografia_lunatic"><div class="photo-label">lunatico.jpg</div></div>
+                <div class="photo-wrapper"><img src="assets/images/fotografia_lua.png" alt="fotografia_lua"><div class="photo-label">mooooon.png</div></div>
+                <div class="photo-wrapper"><img src="assets/images/fotografia_terceiro.jpg" alt="fotografia_terceiro"><div class="photo-label">evangelion.png</div></div>
+                <div class="photo-wrapper"><img src="assets/images/fotografia_pixacao.jpg" alt="fotografia_pixacao"><div class="photo-label">violencia.jpg</div></div>
+                <div class="photo-wrapper"><img src="assets/images/fotografia_autoretrato.jpg" alt="fotografia_autoretrato"><div class="photo-label">retrato.jpg</div></div>
+                <div class="photo-wrapper"><img src="assets/images/fotografia_cerveja.png" alt="fotografia_cerveja"><div class="photo-label">beeer.png</div></div>
+                <div class="photo-wrapper"><img src="assets/images/fotografia_rosas.png" alt="fotografia_rosas"><div class="photo-label">rosas_de_sangue.png</div></div>
             </div>
         </div>
     </div>
@@ -1033,11 +714,11 @@ Nascido em 2003, sou desenvolvedor fullstack, porém sou apaixonado pela área a
 Aqui estão alguns de meus trabalhos, fotografias, textos e projetos pessoais.<br><br>
 
 Redes Sociais:<br>
-- Instagram: <a href="https://instagram.com/bbbiato" target="_blank">@bbbiato</a><br>
-- GitHub: <a href="https://github.com/BrunoBiato" target="_blank">@BrunoBiato</a><br>
-- TikTok: <a href="https://www.tiktok.com/@bbbiato" target="_blank">@bbbiato</a><br>
-- Letterboxd: <a href="https://letterboxd.com/Biato/" target="_blank">Biato</a><br>
-- Spotify: <a href="https://open.spotify.com/user/ndjxteaz10yx0fjfjfc5btel2?si=5bd42063e95c4ca3" target="_blank">Bruno Biato</a>
+- Instagram: <a href="https://instagram.com/bbbiato" target="_blank" rel="noopener noreferrer">@bbbiato</a><br>
+- GitHub: <a href="https://github.com/BrunoBiato" target="_blank" rel="noopener noreferrer">@BrunoBiato</a><br>
+- TikTok: <a href="https://www.tiktok.com/@bbbiato" target="_blank" rel="noopener noreferrer">@bbbiato</a><br>
+- Letterboxd: <a href="https://letterboxd.com/Biato/" target="_blank" rel="noopener noreferrer">Biato</a><br>
+- Spotify: <a href="https://open.spotify.com/user/ndjxteaz10yx0fjfjfc5btel2?si=5bd42063e95c4ca3" target="_blank" rel="noopener noreferrer">Bruno Biato</a>
             </div>
         </div>
     </div>
@@ -1078,7 +759,6 @@ Redes Sociais:<br>
             <div class="comments-list" id="comments-list">
                 <div style="text-align: center; color: #666; margin-top: 20px;">A conectar ao servidor de recados...</div>
             </div>
-            
             <div class="comment-form-container">
                 <p style="font-weight:bold; font-size:12px; margin-bottom:5px;">Deixe um recado (1 por dia):</p>
                 <div class="comment-inputs">
@@ -1110,18 +790,18 @@ Redes Sociais:<br>
         <div class="xp-content" style="padding: 15px;">
             <p style="font-size: 11px; margin-bottom: 8px;">Escolha uma imagem de perfil:</p>
             <div class="avatar-grid">
-                <img src="assets/images/pessoa.png" onclick="window.selecionarAvatar('assets/images/pessoa.png')" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👤</text></svg>'">
-                <img src="assets/images/aviao.png" onclick="window.selecionarAvatar('assets/images/aviao.png')" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✈️</text></svg>'">
-                <img src="assets/images/cachorro.png" onclick="window.selecionarAvatar('assets/images/cachorro.png')" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐶</text></svg>'">
-                <img src="assets/images/cadeiraPraia.png" onclick="window.selecionarAvatar('assets/images/cadeiraPraia.png')" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏖️</text></svg>'">
-                <img src="assets/images/cavalos.png" onclick="window.selecionarAvatar('assets/images/cavalos.png')" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐎</text></svg>'">
-                <img src="assets/images/coqueiro.png" onclick="window.selecionarAvatar('assets/images/coqueiro.png')" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌴</text></svg>'">
-                <img src="assets/images/flor.png" onclick="window.selecionarAvatar('assets/images/flor.png')" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌺</text></svg>'">
-                <img src="assets/images/karate.png" onclick="window.selecionarAvatar('assets/images/karate.png')" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🥋</text></svg>'">
-                <img src="assets/images/moto.png" onclick="window.selecionarAvatar('assets/images/moto.png')" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏍️</text></svg>'">
-                <img src="assets/images/olhoGato.png" onclick="window.selecionarAvatar('assets/images/olhoGato.png')" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👁️</text></svg>'">
-                <img src="assets/images/pato.png" onclick="window.selecionarAvatar('assets/images/pato.png')" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦆</text></svg>'">
-                <img src="assets/images/xadrez.png" onclick="window.selecionarAvatar('assets/images/xadrez.png')" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>♟️</text></svg>'">
+                <img src="assets/images/pessoa.png" onclick="window.selecionarAvatar('assets/images/pessoa.png')" onerror="this.style.display='none'">
+                <img src="assets/images/aviao.png" onclick="window.selecionarAvatar('assets/images/aviao.png')" onerror="this.style.display='none'">
+                <img src="assets/images/cachorro.png" onclick="window.selecionarAvatar('assets/images/cachorro.png')" onerror="this.style.display='none'">
+                <img src="assets/images/cadeiraPraia.png" onclick="window.selecionarAvatar('assets/images/cadeiraPraia.png')" onerror="this.style.display='none'">
+                <img src="assets/images/cavalos.png" onclick="window.selecionarAvatar('assets/images/cavalos.png')" onerror="this.style.display='none'">
+                <img src="assets/images/coqueiro.png" onclick="window.selecionarAvatar('assets/images/coqueiro.png')" onerror="this.style.display='none'">
+                <img src="assets/images/flor.png" onclick="window.selecionarAvatar('assets/images/flor.png')" onerror="this.style.display='none'">
+                <img src="assets/images/karate.png" onclick="window.selecionarAvatar('assets/images/karate.png')" onerror="this.style.display='none'">
+                <img src="assets/images/moto.png" onclick="window.selecionarAvatar('assets/images/moto.png')" onerror="this.style.display='none'">
+                <img src="assets/images/olhoGato.png" onclick="window.selecionarAvatar('assets/images/olhoGato.png')" onerror="this.style.display='none'">
+                <img src="assets/images/pato.png" onclick="window.selecionarAvatar('assets/images/pato.png')" onerror="this.style.display='none'">
+                <img src="assets/images/xadrez.png" onclick="window.selecionarAvatar('assets/images/xadrez.png')" onerror="this.style.display='none'">
             </div>
         </div>
     </div>
@@ -1167,11 +847,11 @@ Redes Sociais:<br>
             <div id="clock">00:00</div>
         </div>
     </div>
-
+<script src="https://cdn.jsdelivr.net/npm/leo-profanity/dist/leo-profanity.min.js"></script>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, onSnapshot, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         const myFirebaseConfig = {
             apiKey: "AIzaSyC-WAYR_4ePioEE5Qpyg_g9VYr1DNjFFSc",
@@ -1182,14 +862,38 @@ Redes Sociais:<br>
             appId: "1:239629405843:web:78b29db0e8eebdfb2a4766",
             measurementId: "G-XJNN9P62G8"
         };
+        const AVATARES_PERMITIDOS = [
+            'assets/images/pessoa.png',
+            'assets/images/aviao.png',
+            'assets/images/cachorro.png',
+            'assets/images/cadeiraPraia.png',
+            'assets/images/cavalos.png',
+            'assets/images/coqueiro.png',
+            'assets/images/flor.png',
+            'assets/images/karate.png',
+            'assets/images/moto.png',
+            'assets/images/olhoGato.png',
+            'assets/images/pato.png',
+            'assets/images/xadrez.png'
+        ];
+
+        function avatarPermitido(foto) {
+            return AVATARES_PERMITIDOS.includes(foto) ? foto : 'assets/images/pessoa.png';
+        }
+        function sanitizarTexto(str, maxLen) {
+            if (!str) return '';
+            const div = document.createElement('div');
+            div.textContent = String(str).trim().slice(0, maxLen);
+            return div.innerHTML; 
+        }
 
         setTimeout(() => {
             const loadingScreen = document.getElementById('loading-screen');
-            if(loadingScreen) {
+            if (loadingScreen) {
                 loadingScreen.style.opacity = '0';
-                setTimeout(() => { loadingScreen.style.display = 'none'; }, 500); 
+                setTimeout(() => { loadingScreen.style.display = 'none'; }, 500);
             }
-        }, 3000); 
+        }, 3000);
 
         setTimeout(() => {
             const clippyCont = document.getElementById('clippy-container');
@@ -1203,7 +907,7 @@ Redes Sociais:<br>
             horas = horas < 10 ? '0' + horas : horas;
             minutos = minutos < 10 ? '0' + minutos : minutos;
             const clockElem = document.getElementById('clock');
-            if(clockElem) clockElem.textContent = horas + ':' + minutos;
+            if (clockElem) clockElem.textContent = horas + ':' + minutos;
         }
         setInterval(atualizarRelogio, 1000);
         atualizarRelogio();
@@ -1219,56 +923,54 @@ Redes Sociais:<br>
         }
 
         document.addEventListener('click', (e) => {
-            if(startMenu && !startMenu.contains(e.target) && e.target !== btnIniciar) {
+            if (startMenu && !startMenu.contains(e.target) && e.target !== btnIniciar) {
                 startMenu.style.display = 'none';
             }
         });
 
-        window.fecharStartMenu = function() {
-            if(startMenu) startMenu.style.display = 'none';
-        }
+        window.fecharStartMenu = function () {
+            if (startMenu) startMenu.style.display = 'none';
+        };
 
         let zIndexCounter = 100;
 
-        window.trazerParaFrente = function(janela) {
+        window.trazerParaFrente = function (janela) {
             zIndexCounter++;
             janela.style.zIndex = zIndexCounter;
-        }
+        };
 
-        window.abrirJanela = function(idJanela, idIcone = null) {
+        window.abrirJanela = function (idJanela, idIcone = null) {
             const janela = document.getElementById(idJanela);
             if (janela) {
                 janela.style.display = 'flex';
                 janela.classList.remove('popup-active');
                 setTimeout(() => { janela.classList.add('popup-active'); }, 10);
                 window.trazerParaFrente(janela);
-                
                 if (idIcone) {
                     const imgElement = document.querySelector(`#${idIcone} img`);
                     if (imgElement && imgElement.dataset.aberta) {
                         imgElement.src = imgElement.dataset.aberta;
                     }
-                    janela.dataset.iconeLigado = idIcone; 
+                    janela.dataset.iconeLigado = idIcone;
                 }
                 if (window.animarClippyAcao) window.animarClippyAcao('abrir');
             }
-        }
+        };
 
         const audioPasta = new Audio('assets/songs/clique.mp3');
         audioPasta.preload = 'auto';
 
-        window.tocarSomPasta = function() {
+        window.tocarSomPasta = function () {
             if (screensaverActive) return;
             const somRapido = audioPasta.cloneNode();
             somRapido.play().catch(() => {});
-        }
+        };
 
-        window.fecharJanela = function(idJanela) {
+        window.fecharJanela = function (idJanela) {
             const janela = document.getElementById(idJanela);
             if (janela) {
                 janela.classList.remove('popup-active');
-                setTimeout(() => { janela.style.display = 'none'; }, 250); 
-                
+                setTimeout(() => { janela.style.display = 'none'; }, 250);
                 const idIcone = janela.dataset.iconeLigado;
                 if (idIcone) {
                     const imgElement = document.querySelector(`#${idIcone} img`);
@@ -1276,19 +978,18 @@ Redes Sociais:<br>
                         imgElement.src = imgElement.dataset.fechada;
                     }
                 }
-
-                if(idJanela === 'janela-player') {
+                if (idJanela === 'janela-player') {
                     const audio = document.getElementById('bg-audio');
-                    if(audio) audio.pause();
+                    if (audio) audio.pause();
                 }
                 if (window.animarClippyAcao) window.animarClippyAcao('fechar');
             }
-        }
+        };
 
         const janelas = document.querySelectorAll('.xp-window, .xp-player');
         janelas.forEach(janela => {
             janela.addEventListener('mousedown', () => window.trazerParaFrente(janela));
-            janela.addEventListener('touchstart', () => window.trazerParaFrente(janela), {passive: true});
+            janela.addEventListener('touchstart', () => window.trazerParaFrente(janela), { passive: true });
         });
 
         const playlistMusicas = ['euphoria.mp3', 'reflections.mp3'];
@@ -1301,33 +1002,33 @@ Redes Sociais:<br>
         const songTitle = document.getElementById('song-title');
 
         function carregarMusica(index) {
-            if(audio && playlistMusicas.length > 0) {
+            if (audio && playlistMusicas.length > 0) {
                 const nomeArquivo = playlistMusicas[index];
                 const source = audio.querySelector('source');
-                source.src = 'assets/songs/' + nomeArquivo; 
-                if(songTitle) songTitle.textContent = "A reproduzir: " + nomeArquivo;
+                source.src = 'assets/songs/' + nomeArquivo;
+                if (songTitle) songTitle.textContent = "A reproduzir: " + nomeArquivo;
                 audio.load();
             }
         }
 
-        if(btnPlay && audio) btnPlay.addEventListener('click', () => { audio.play().catch(() => {}); });
-        if(btnPause && audio) btnPause.addEventListener('click', () => { audio.pause(); });
+        if (btnPlay && audio) btnPlay.addEventListener('click', () => { audio.play().catch(() => {}); });
+        if (btnPause && audio) btnPause.addEventListener('click', () => { audio.pause(); });
 
-        if(btnNext) {
+        if (btnNext) {
             btnNext.addEventListener('click', () => {
                 indiceMusicaAtual = (indiceMusicaAtual + 1) % playlistMusicas.length;
                 carregarMusica(indiceMusicaAtual);
                 if (!audio.paused) audio.play();
-                if (window.animarClippyAcao) window.animarClippyAcao('musica'); 
+                if (window.animarClippyAcao) window.animarClippyAcao('musica');
             });
         }
 
-        if(btnPrev) {
+        if (btnPrev) {
             btnPrev.addEventListener('click', () => {
                 indiceMusicaAtual = (indiceMusicaAtual - 1 + playlistMusicas.length) % playlistMusicas.length;
                 carregarMusica(indiceMusicaAtual);
                 if (!audio.paused) audio.play();
-                if (window.animarClippyAcao) window.animarClippyAcao('musica'); 
+                if (window.animarClippyAcao) window.animarClippyAcao('musica');
             });
         }
 
@@ -1341,85 +1042,75 @@ Redes Sociais:<br>
         const clippyNotif = document.getElementById('clippy-notif');
 
         let clippyTimeout;
-        let clippyState = 'idle'; 
+        let clippyState = 'idle';
         let wasMusicPlaying = false;
         const audioBalao = new Audio('assets/songs/balao.mp3');
         audioBalao.preload = 'auto';
 
-        window.animarClippyAcao = function(acao) {
-            if(!clippyImg) return;
+        window.animarClippyAcao = function (acao) {
+            if (!clippyImg) return;
             clippyImg.className = 'clippy-img';
-            void clippyImg.offsetWidth; 
-            
-            if(acao === 'abrir') clippyImg.classList.add('anim-jump');
-            else if(acao === 'arrastar') clippyImg.classList.add('anim-shake');
-            else if(acao === 'musica') clippyImg.classList.add('anim-think');
-            else if(acao === 'fechar') clippyImg.classList.add('anim-nod');
-        }
+            void clippyImg.offsetWidth;
+            if (acao === 'abrir') clippyImg.classList.add('anim-jump');
+            else if (acao === 'arrastar') clippyImg.classList.add('anim-shake');
+            else if (acao === 'musica') clippyImg.classList.add('anim-think');
+            else if (acao === 'fechar') clippyImg.classList.add('anim-nod');
+        };
 
-        window.chamarClippy = function() {
-            if(clippyContainer) {
+        window.chamarClippy = function () {
+            if (clippyContainer) {
                 clippyContainer.classList.add('clippy-show');
                 window.abrirMenuClippy();
             }
-        }
+        };
 
-        window.abrirMenuClippy = function() {
-            clearTimeout(clippyTimeout); 
+        window.abrirMenuClippy = function () {
+            clearTimeout(clippyTimeout);
             clippyState = 'menu';
-            if(clippyNotif) clippyNotif.style.display = "none"; 
-            
-            if(clippyText) clippyText.textContent = "Como posso ajudar você hoje?";
-            if(clippyOptions) clippyOptions.style.display = "block";
-            if(clippyBubble) clippyBubble.style.display = "block";
+            if (clippyNotif) clippyNotif.style.display = "none";
+            if (clippyText) clippyText.textContent = "Como posso ajudar você hoje?";
+            if (clippyOptions) clippyOptions.style.display = "block";
+            if (clippyBubble) clippyBubble.style.display = "block";
             window.animarClippyAcao('abrir');
         };
 
-        window.acaoClippy = function(acao) {
-            if(clippyOptions) clippyOptions.style.display = "none";
-            
-            if(acao === 'sobre') {
+        window.acaoClippy = function (acao) {
+            if (clippyOptions) clippyOptions.style.display = "none";
+            if (acao === 'sobre') {
                 clippyText.textContent = "Este é o portfólio do Bruno! Clique nas pastas na área de trabalho para explorar.";
                 clippyState = 'tip';
                 window.animarClippyAcao('abrir');
                 esconderClippyAposTempo(4000);
-            } else if(acao === 'musica') {
+            } else if (acao === 'musica') {
                 clippyText.textContent = "Ótima escolha! Abrindo o Media Player para você...";
                 window.abrirJanela('janela-player', 'icon-player');
                 clippyState = 'tip';
                 esconderClippyAposTempo(3000);
-            } else if(acao === 'comentar') {
+            } else if (acao === 'comentar') {
                 clippyText.textContent = "Legal! Abrindo o Mural de Recados para você deixar sua marca...";
                 window.abrirJanela('janela-comentarios', 'icon-comentarios');
                 clippyState = 'tip';
                 esconderClippyAposTempo(3000);
-            } else if(acao === 'esconder') {
+            } else if (acao === 'esconder') {
                 window.animarClippyAcao('fechar');
                 clippyState = 'idle';
-                if(clippyBubble) clippyBubble.style.display = "none";
+                if (clippyBubble) clippyBubble.style.display = "none";
             }
         };
 
         function esconderClippyAposTempo(ms = 3000) {
             clearTimeout(clippyTimeout);
             clippyTimeout = setTimeout(() => {
-                if(clippyState === 'tip' && clippyBubble) {
-                    clippyBubble.style.display = 'none';
-                }
+                if (clippyState === 'tip' && clippyBubble) clippyBubble.style.display = 'none';
             }, ms);
         }
 
         if (clippyContainer) {
             clippyContainer.addEventListener('mouseenter', () => {
-                if (clippyState === 'tip') {
-                    clearTimeout(clippyTimeout);
-                    if(clippyBubble) clippyBubble.style.display = 'block';
-                }
+                if (clippyState === 'tip') { clearTimeout(clippyTimeout); if (clippyBubble) clippyBubble.style.display = 'block'; }
             });
             clippyContainer.addEventListener('mouseleave', () => {
-                if (clippyState === 'tip' && clippyBubble.style.display === 'block') {
-                    esconderClippyAposTempo(3000); 
-                }
+                if (clippyState === 'tip' && clippyBubble.style.display === 'block') esconderClippyAposTempo(3000);
             });
         }
 
@@ -1430,22 +1121,19 @@ Redes Sociais:<br>
                     if (clippyState === 'menu') clippyState = 'idle';
                 }
             }
-            
             const emojiPicker = document.getElementById('emoji-picker-window');
             const commentInputs = document.querySelector('.comment-inputs');
             const actions = document.querySelector('.comment-actions');
-            
             if (emojiPicker && emojiPicker.style.display === 'flex' && !emojiPicker.contains(e.target) && (!commentInputs || !commentInputs.contains(e.target)) && (!actions || !actions.contains(e.target))) {
                 emojiPicker.classList.remove('popup-active');
                 setTimeout(() => { emojiPicker.style.display = 'none'; }, 250);
             }
         });
 
-        window.mostrarDicaClippy = function() {
-            if(screensaverActive) return;
-            if(!clippyBubble || !clippyText || !clippyOptions || !clippyContainer.classList.contains("clippy-show")) return;
-            if(clippyState === 'menu') return; 
-            
+        window.mostrarDicaClippy = function () {
+            if (screensaverActive) return;
+            if (!clippyBubble || !clippyText || !clippyOptions || !clippyContainer.classList.contains("clippy-show")) return;
+            if (clippyState === 'menu') return;
             const dicas = [
                 "Ei! Sabia que você pode clicar no Media Player e colocar algumas músicas legais?",
                 "Experimente arrastar as janelas clicando e segurando na barra azul superior!",
@@ -1454,21 +1142,17 @@ Redes Sociais:<br>
                 "Dica de ouro: Se você abrir várias janelas, elas ficam umas sobre as outras. Legal, né?",
                 "Deixe uma mensagem no Mural de Recados para marcar a sua visita!"
             ];
-            
             clippyText.textContent = dicas[Math.floor(Math.random() * dicas.length)];
             clippyOptions.style.display = "none";
             clippyBubble.style.display = 'block';
-            
-            if(clippyNotif) clippyNotif.style.display = 'block'; 
-            
+            if (clippyNotif) clippyNotif.style.display = 'block';
             clippyState = 'tip';
             window.animarClippyAcao('abrir');
             audioBalao.cloneNode().play().catch(() => {});
+            esconderClippyAposTempo(3000);
+        };
 
-            esconderClippyAposTempo(3000); 
-        }
-
-        setTimeout(window.mostrarDicaClippy, 6000); 
+        setTimeout(window.mostrarDicaClippy, 6000);
         setInterval(window.mostrarDicaClippy, 60000);
 
         let isDraggingWindow = false;
@@ -1486,32 +1170,27 @@ Redes Sociais:<br>
                 winInitialLeft = elementoJanela.offsetLeft;
                 winInitialTop = elementoJanela.offsetTop;
                 window.trazerParaFrente(elementoJanela);
-                if (window.animarClippyAcao) window.animarClippyAcao('arrastar'); 
-                e.preventDefault(); 
+                if (window.animarClippyAcao) window.animarClippyAcao('arrastar');
+                e.preventDefault();
             });
         }
 
         document.querySelectorAll('.window-draggable').forEach(janela => {
-            if(janela.id !== 'clippy-container') tornarArrastavel(janela);
+            if (janela.id !== 'clippy-container') tornarArrastavel(janela);
         });
 
         window.addEventListener('mousemove', (e) => {
             if (isDraggingWindow && dragTarget) {
                 e.preventDefault();
-                let dx = e.clientX - winStartX;
-                let dy = e.clientY - winStartY;
-                let novoTopo = winInitialTop + dy;
-                let novoEsquerda = winInitialLeft + dx;
-                if (novoTopo < 0) novoTopo = 0; 
+                let novoTopo = winInitialTop + (e.clientY - winStartY);
+                let novoEsquerda = winInitialLeft + (e.clientX - winStartX);
+                if (novoTopo < 0) novoTopo = 0;
                 dragTarget.style.top = novoTopo + "px";
                 dragTarget.style.left = novoEsquerda + "px";
             }
         });
 
-        window.addEventListener('mouseup', () => {
-            isDraggingWindow = false;
-            dragTarget = null;
-        });
+        window.addEventListener('mouseup', () => { isDraggingWindow = false; dragTarget = null; });
 
         let isClippyDragging = false;
         let hasMovedClippy = false;
@@ -1521,11 +1200,9 @@ Redes Sociais:<br>
             clippyImg.addEventListener('mousedown', (e) => {
                 isClippyDragging = true;
                 hasMovedClippy = false;
-                clippyStartX = e.clientX;
-                clippyStartY = e.clientY;
-                clippyInitialLeft = clippyContainer.offsetLeft;
-                clippyInitialTop = clippyContainer.offsetTop;
-                e.preventDefault(); 
+                clippyStartX = e.clientX; clippyStartY = e.clientY;
+                clippyInitialLeft = clippyContainer.offsetLeft; clippyInitialTop = clippyContainer.offsetTop;
+                e.preventDefault();
             });
             window.addEventListener('mousemove', (e) => {
                 if (isClippyDragging) {
@@ -1546,7 +1223,7 @@ Redes Sociais:<br>
             window.addEventListener('mouseup', () => {
                 if (isClippyDragging) {
                     isClippyDragging = false;
-                    if (!hasMovedClippy) window.abrirMenuClippy(); 
+                    if (!hasMovedClippy) window.abrirMenuClippy();
                 }
             });
         }
@@ -1563,9 +1240,9 @@ Redes Sociais:<br>
             if (screensaverActive) {
                 ssElement.style.display = 'none';
                 screensaverActive = false;
-                if(reqAnim) cancelAnimationFrame(reqAnim);
+                if (reqAnim) cancelAnimationFrame(reqAnim);
                 const bgAudio = document.getElementById('bg-audio');
-                if (wasMusicPlaying && bgAudio) bgAudio.play().catch(()=>{});
+                if (wasMusicPlaying && bgAudio) bgAudio.play().catch(() => {});
             }
         }
 
@@ -1580,13 +1257,8 @@ Redes Sociais:<br>
                 ssElement.style.display = 'block';
                 screensaverActive = true;
                 const bgAudio = document.getElementById('bg-audio');
-                if (bgAudio && !bgAudio.paused) {
-                    wasMusicPlaying = true;
-                    bgAudio.pause();
-                } else {
-                    wasMusicPlaying = false;
-                }
-                if(clippyBubble) clippyBubble.style.display = 'none';
+                if (bgAudio && !bgAudio.paused) { wasMusicPlaying = true; bgAudio.pause(); } else { wasMusicPlaying = false; }
+                if (clippyBubble) clippyBubble.style.display = 'none';
                 ssX = Math.random() * (window.innerWidth - 200);
                 ssY = Math.random() * (window.innerHeight - 100);
                 animarScreensaver();
@@ -1596,8 +1268,7 @@ Redes Sociais:<br>
         function animarScreensaver() {
             if (!screensaverActive || !ssMover) return;
             const rect = ssMover.getBoundingClientRect();
-            ssX += ssDx;
-            ssY += ssDy;
+            ssX += ssDx; ssY += ssDy;
             if (ssX + rect.width >= window.innerWidth || ssX <= 0) ssDx = -ssDx;
             if (ssY + rect.height >= window.innerHeight || ssY <= 0) ssDy = -ssDy;
             ssMover.style.left = ssX + 'px';
@@ -1613,22 +1284,29 @@ Redes Sociais:<br>
             { nome: "Visitante", texto: "Nossa, que nostalgia desse layout! :)", foto: "assets/images/pessoa.png", timestamp: Date.now() }
         ];
 
-        const palavrasProibidas = [
-            'merda', 'porra', 'caralho', 'buceta', 'puta', 'foder', 'fuder',
-            'cu', 'arrombado', 'babaca', 'cacete', 'piroca', 'pica', 'viado', 'estupro',
-            'autista', 'homofóbico', 'fracassado'
-        ];
+        
+                
+        LeoProfanity.loadDictionary('en');
+        
+        
+        LeoProfanity.add([
+            'merda', 'porra', 'caralho', 'buceta', 'puta', 'foder',
+            'fuder', 'arrombado', 'babaca', 'cacete', 'piroca', 'pica',
+            'viado', 'estupro', 'cu', 'fdp', 'vsf', 'tnc'
+        ]);
+        
+        function censurarTexto(texto) {
+            if (!texto) return texto;
+            return LeoProfanity.clean(texto); 
+        }
 
         function censurarTexto(texto) {
             if (!texto) return texto;
             let textoCensurado = texto;
-            
             palavrasProibidas.forEach(palavra => {
                 const regex = new RegExp('\\b' + palavra + '\\b', 'gi');
-                const censura = '*'.repeat(palavra.length);
-                textoCensurado = textoCensurado.replace(regex, censura);
+                textoCensurado = textoCensurado.replace(regex, '*'.repeat(palavra.length));
             });
-            
             return textoCensurado;
         }
 
@@ -1641,21 +1319,17 @@ Redes Sociais:<br>
             try {
                 let finalConfig = myFirebaseConfig;
                 appId = 'y2k-portfolio';
-
                 if (typeof __firebase_config !== 'undefined' && __firebase_config) {
                     finalConfig = JSON.parse(__firebase_config);
                     appId = typeof __app_id !== 'undefined' ? __app_id : 'y2k-portfolio';
                 }
-
                 if (!finalConfig.apiKey || finalConfig.apiKey === "COLE_AQUI_SUA_API_KEY") {
                     renderizarComentarios(comentariosMemoria);
                     return;
                 }
-
                 const app = initializeApp(finalConfig);
                 auth = getAuth(app);
                 db = getFirestore(app);
-
                 const initAuth = async () => {
                     if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
                         await signInWithCustomToken(auth, __initial_auth_token);
@@ -1663,133 +1337,128 @@ Redes Sociais:<br>
                         await signInAnonymously(auth);
                     }
                 };
-                
                 await initAuth();
-
                 onAuthStateChanged(auth, (user) => {
-                    if (user) {
-                        currentUser = user;
-                        iniciarLeituraNuvem();
-                    }
+                    if (user) { currentUser = user; iniciarLeituraNuvem(); }
                 });
             } catch (error) {
                 renderizarComentarios(comentariosMemoria);
             }
         }
-
         function iniciarLeituraNuvem() {
             if (!currentUser || !db) return;
             const commentsRef = collection(db, 'artifacts', appId, 'public', 'data', 'comments');
-            
             onSnapshot(commentsRef, (snapshot) => {
                 comentariosSalvos = [];
-                snapshot.forEach(doc => {
-                    comentariosSalvos.push({ id: doc.id, ...doc.data() });
-                });
+                snapshot.forEach(doc => { comentariosSalvos.push({ id: doc.id, ...doc.data() }); });
                 comentariosSalvos.sort((a, b) => a.timestamp - b.timestamp);
-                
-                if(comentariosSalvos.length === 0) {
-                    renderizarComentarios(comentariosMemoria);
-                } else {
-                    renderizarComentarios(comentariosSalvos);
-                }
-            }, (error) => {
-                renderizarComentarios(comentariosMemoria);
-            });
+                renderizarComentarios(comentariosSalvos.length === 0 ? comentariosMemoria : comentariosSalvos);
+            }, () => { renderizarComentarios(comentariosMemoria); });
         }
-
         function isMesmoDia(data1, data2) {
-            const d1 = new Date(data1);
-            const d2 = new Date(data2);
-            return d1.getFullYear() === d2.getFullYear() &&
-                   d1.getMonth() === d2.getMonth() &&
-                   d1.getDate() === d2.getDate();
+            const d1 = new Date(data1), d2 = new Date(data2);
+            return d1.getFullYear() === d2.getFullYear() && d1.getMonth() === d2.getMonth() && d1.getDate() === d2.getDate();
         }
-
         function formatarData(tempo) {
             const data = new Date(tempo);
-            return `${data.getDate()}/${data.getMonth()+1}/${data.getFullYear()}`;
+            return `${data.getDate()}/${data.getMonth() + 1}/${data.getFullYear()}`;
         }
-
         function parseEmojis(text) {
             const emojiMap = {
-                ':smile:': 'smile.gif',
-                ':banana:': 'banana.gif',
-                ':tchau:': 'tchau.gif',
-                ':cupido:': 'cupido.gif',
-                ':balaoCoracao:': 'balaoCoracao.gif',
-                ':coracaoGrande:': 'coracaoGrande.gif',
-                ':palmas:': 'palmas.gif'
+                ':smile:': 'smile.gif', ':banana:': 'banana.gif', ':tchau:': 'tchau.gif',
+                ':cupido:': 'cupido.gif', ':balaoCoracao:': 'balaoCoracao.gif',
+                ':coracaoGrande:': 'coracaoGrande.gif', ':palmas:': 'palmas.gif'
             };
-            
-            let div = document.createElement('div');
+            const div = document.createElement('div');
             div.innerText = text;
             let safeText = div.innerHTML;
-
             for (const [code, file] of Object.entries(emojiMap)) {
                 const safeCode = code.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
-                const regex = new RegExp(safeCode, 'g');
-                safeText = safeText.replace(regex, `<img src="assets/images/emojis/${file}" class="inline-emoji" alt="${code}" onerror="this.style.display='none'">`);
+                safeText = safeText.replace(new RegExp(safeCode, 'g'), `<img src="assets/images/emojis/${file}" class="inline-emoji" alt="${code}" onerror="this.style.display='none'">`);
             }
             return safeText;
         }
-
         function renderizarComentarios(lista) {
             const listEl = document.getElementById('comments-list');
             if (!listEl) return;
-            
             listEl.innerHTML = '';
+
             lista.forEach(c => {
                 const item = document.createElement('div');
                 item.className = 'comment-item';
+                const avatarDiv = document.createElement('div');
+                avatarDiv.className = 'comment-avatar';
+                const avatarImg = document.createElement('img');
+                avatarImg.setAttribute('src', avatarPermitido(c.foto));
+                avatarImg.setAttribute('alt', 'Avatar');
+                avatarImg.setAttribute('onerror', "this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👤</text></svg>'");
+                avatarDiv.appendChild(avatarImg);
 
-                item.innerHTML = `
-                    <div class="comment-avatar">
-                        <img src="${c.foto || 'assets/images/pessoa.png'}" alt="Avatar" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👤</text></svg>'">
-                    </div>
-                    <div class="comment-body">
-                        <div class="comment-header">
-                            <span>${c.nome}</span>
-                            <div style="display:flex; align-items:center; gap:5px;">
-                                <span class="comment-date">${formatarData(c.timestamp)}</span>
-                            </div>
-                        </div>
-                        <div class="comment-text">${parseEmojis(c.texto)}</div>
-                    </div>
-                `;
+            
+                const bodyDiv = document.createElement('div');
+                bodyDiv.className = 'comment-body';
+
+              
+                const headerDiv = document.createElement('div');
+                headerDiv.className = 'comment-header';
+
+                const nomeSpan = document.createElement('span');
+                nomeSpan.textContent = c.nome;
+
+                const metaDiv = document.createElement('div');
+                metaDiv.style.cssText = 'display:flex; align-items:center; gap:5px;';
+                const dataSpan = document.createElement('span');
+                dataSpan.className = 'comment-date';
+                dataSpan.textContent = formatarData(c.timestamp);
+                metaDiv.appendChild(dataSpan);
+
+                headerDiv.appendChild(nomeSpan);
+                headerDiv.appendChild(metaDiv);
+
+               
+                const textoDiv = document.createElement('div');
+                textoDiv.className = 'comment-text';
+                textoDiv.innerHTML = parseEmojis(c.texto);
+
+                bodyDiv.appendChild(headerDiv);
+                bodyDiv.appendChild(textoDiv);
+
+                item.appendChild(avatarDiv);
+                item.appendChild(bodyDiv);
                 listEl.appendChild(item);
             });
+
             listEl.scrollTop = listEl.scrollHeight;
         }
 
-        window.abrirSeletorAvatar = function() {
+        window.abrirSeletorAvatar = function () {
             const picker = document.getElementById('avatar-picker-window');
-            if(picker) {
+            if (picker) {
                 picker.style.display = 'flex';
                 picker.classList.remove('popup-active');
                 setTimeout(() => { picker.classList.add('popup-active'); }, 10);
                 window.trazerParaFrente(picker);
             }
-        }
+        };
 
-        window.fecharSeletorAvatar = function() {
+        window.fecharSeletorAvatar = function () {
             const picker = document.getElementById('avatar-picker-window');
-            if(picker) {
+            if (picker) {
                 picker.classList.remove('popup-active');
                 setTimeout(() => { picker.style.display = 'none'; }, 250);
             }
-        }
+        };
 
-        window.selecionarAvatar = function(caminho) {
-            avatarSelecionado = caminho;
+        window.selecionarAvatar = function (caminho) {
+            avatarSelecionado = avatarPermitido(caminho);
             const preview = document.getElementById('current-avatar-preview');
-            if(preview) preview.src = caminho;
+            if (preview) preview.src = avatarSelecionado;
             window.fecharSeletorAvatar();
-        }
+        };
 
-        window.toggleEmojiPicker = function() {
+        window.toggleEmojiPicker = function () {
             const picker = document.getElementById('emoji-picker-window');
-            if(picker) {
+            if (picker) {
                 if (picker.style.display === 'none' || picker.style.display === '') {
                     picker.style.display = 'flex';
                     picker.classList.remove('popup-active');
@@ -1800,26 +1469,23 @@ Redes Sociais:<br>
                     setTimeout(() => { picker.style.display = 'none'; }, 250);
                 }
             }
-        }
+        };
 
-        window.inserirEmoji = function(emoji) {
+        window.inserirEmoji = function (emoji) {
             const textarea = document.getElementById('comment-text');
-            if(textarea) {
-                textarea.value += emoji;
-                textarea.focus();
-            }
+            if (textarea) { textarea.value += emoji; textarea.focus(); }
             window.toggleEmojiPicker();
-        }
+        };
 
-        window.enviarComentario = async function() {
+        window.enviarComentario = async function () {
             const errorMsg = document.getElementById('comment-error');
             const nomeInput = document.getElementById('comment-name');
             const textoInput = document.getElementById('comment-text');
-            
+
             let nome = nomeInput.value.trim();
             let texto = textoInput.value.trim();
 
-            if(!nome || !texto) {
+            if (!nome || !texto) {
                 errorMsg.style.color = "red";
                 errorMsg.textContent = "Preencha o seu nome e escreva uma mensagem!";
                 return;
@@ -1827,12 +1493,12 @@ Redes Sociais:<br>
 
             if (contemLink(nome) || contemLink(texto)) {
                 errorMsg.style.color = "red";
-                errorMsg.textContent = "Oops! Para a segurança da nossa comunidade, não permitimos links externos. Escreva apenas texto, por favor! 🛡️😊";
+                errorMsg.textContent = "Oops! Não permitimos links externos. Escreva apenas texto, por favor! 🛡️";
                 return;
             }
 
-            nome = censurarTexto(nome);
-            texto = censurarTexto(texto);
+            nome = censurarTexto(sanitizarTexto(nome, 20));
+            texto = censurarTexto(sanitizarTexto(texto, 100));
 
             const now = Date.now();
 
@@ -1854,37 +1520,32 @@ Redes Sociais:<br>
             try {
                 errorMsg.style.color = "blue";
                 errorMsg.textContent = "A enviar recado...";
-                
                 const commentsRef = collection(db, 'artifacts', appId, 'public', 'data', 'comments');
                 await addDoc(commentsRef, {
                     uid: currentUser.uid,
                     nome: nome,
                     texto: texto,
                     timestamp: now,
-                    foto: avatarSelecionado
+                    foto: avatarSelecionado 
                 });
-                
                 limparFormularioComentario();
-            } catch(e) {
+            } catch (e) {
                 errorMsg.style.color = "red";
                 errorMsg.textContent = "Erro ao enviar. Tente novamente.";
             }
-        }
+        };
 
         function limparFormularioComentario() {
             document.getElementById('comment-name').value = '';
             document.getElementById('comment-text').value = '';
             document.getElementById('comment-error').textContent = '';
-            
             const emojiPicker = document.getElementById('emoji-picker-window');
-            if(emojiPicker) {
+            if (emojiPicker) {
                 emojiPicker.classList.remove('popup-active');
                 setTimeout(() => { emojiPicker.style.display = 'none'; }, 250);
             }
-
             window.selecionarAvatar("assets/images/pessoa.png");
-            
-            if(typeof window.animarClippyAcao === 'function') window.animarClippyAcao('abrir');
+            if (typeof window.animarClippyAcao === 'function') window.animarClippyAcao('abrir');
         }
 
         initCloudDB();
