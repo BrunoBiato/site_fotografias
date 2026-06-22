@@ -901,7 +901,7 @@ Redes Sociais:<br>
             if (!str) return '';
             const div = document.createElement('div');
             div.textContent = String(str).trim().slice(0, maxLen);
-            return div.innerHTML; 
+            return div.innerHTML;
         }
 
         function atualizarRelogio() {
@@ -1287,6 +1287,7 @@ Redes Sociais:<br>
         const comentariosMemoria = [
             { nome: "Visitante", texto: "Nossa, que nostalgia desse layout! :)", foto: "assets/images/pessoa.png", timestamp: Date.now() }
         ];
+
         LeoProfanity.loadDictionary('en');
         LeoProfanity.add([
             'merda', 'porra', 'caralho', 'buceta', 'puta', 'foder',
@@ -1362,11 +1363,11 @@ Redes Sociais:<br>
                 ':cupido:': 'cupido.gif', ':balaoCoracao:': 'balaoCoracao.gif',
                 ':coracaoGrande:': 'coracaoGrande.gif', ':palmas:': 'palmas.gif'
             };
-     
+
             const div = document.createElement('div');
             div.innerText = text;
             let safeText = div.innerHTML;
-           
+
             for (const [code, file] of Object.entries(emojiMap)) {
                 const safeCode = code.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
                 safeText = safeText.replace(new RegExp(safeCode, 'g'), `<img src="assets/images/emojis/${file}" class="inline-emoji" alt="${code}" onerror="this.style.display='none'">`);
@@ -1394,12 +1395,11 @@ Redes Sociais:<br>
                 const bodyDiv = document.createElement('div');
                 bodyDiv.className = 'comment-body';
 
-    
                 const headerDiv = document.createElement('div');
                 headerDiv.className = 'comment-header';
 
                 const nomeSpan = document.createElement('span');
-                nomeSpan.textContent = c.nome; 
+                nomeSpan.textContent = c.nome;
 
                 const metaDiv = document.createElement('div');
                 metaDiv.style.cssText = 'display:flex; align-items:center; gap:5px;';
@@ -1411,7 +1411,6 @@ Redes Sociais:<br>
                 headerDiv.appendChild(nomeSpan);
                 headerDiv.appendChild(metaDiv);
 
-                /
                 const textoDiv = document.createElement('div');
                 textoDiv.className = 'comment-text';
                 textoDiv.innerHTML = parseEmojis(c.texto);
@@ -1522,7 +1521,7 @@ Redes Sociais:<br>
                     nome: nome,
                     texto: texto,
                     timestamp: now,
-                    foto: avatarSelecionado  
+                    foto: avatarSelecionado
                 });
                 limparFormularioComentario();
             } catch (e) {
